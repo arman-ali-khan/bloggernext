@@ -11,7 +11,7 @@ const blog = ({data}) => {
     const router = useRouter()
     const id = router.query.blogId
     return (
-        <Layout title={data.title} description={data.title} body={data.body} thumb={data.thumb}>
+        <Layout title={data.title} description={data.body} body={data.body} thumb={data.thumb}>
            <div className='md:flex w-full '>
             <div className='md:w-full m-4'>
             <div className="mx-auto sm:p-10 md:p-6 dark:bg-gray-800 ">
