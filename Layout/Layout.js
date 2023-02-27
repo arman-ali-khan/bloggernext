@@ -11,7 +11,7 @@ const Layout = ({children,title,description,body,thumb}) => {
              <Head>
              <title>{title}</title>
         <meta name="description" content={description} key="desc" />
-        <meta property="og:title" content={body} />
+        <meta property="og:title" content={title} />
         <meta
           property="og:description"
           content={body}
