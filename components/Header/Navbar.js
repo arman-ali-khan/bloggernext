@@ -1,25 +1,44 @@
 import { contextProvider } from '../../context/AuthContext';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BottomBar from './BottomBar';
+import Link from 'next/link';
+import axios from 'axios';
 
 const Navbar = () => {
   const {googleLogin,user,logOut} = useContext(contextProvider)
+  const [dbUser, setDbUser] = useState({});
 
-
-  const handleGoogleLogin = ()=>{
-    googleLogin().then(result=>{
-      const user = result.user
-      console.log(user)
-    }).catch(err=>{
-      console.error(err);
-    })
-  }
-
-  const logOutUser = () =>{
-    logOut().then(result=>{
-      console.log(result)
-    })
-  }
+ 
+  
+          // fetch(`https://blog-server-sparmankhan.vercel.app/blogs/dbUser?email=${user?.email}`)
+          // .then(res=>res.json())
+          // .then(data=>{
+          //     setDbUser(data)
+          // })
+          useEffect(() => {
+            axios.get(`https://blog-server-sparmankhan.vercel.app/blogs/dbUser?email=${user?.email}`)
+            .then((response) => {
+              setDbUser(response.data);
+            }).catch(function (error) {
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+              } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+              }
+              console.log(error.config);
+            });
+           }, [user]);
+        
     return (
         <div className="navbar bg-base-100 border">
   <div className="navbar-start">
@@ -42,7 +61,7 @@ const Navbar = () => {
         <li><a>Item 3</a></li>
       </ul>
     </div>
-    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+    <Link href={'/'} className="btn btn-ghost normal-case text-xl">Home</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -61,14 +80,9 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    {
-      user?.uid ?  <>
-      {user?.displayName}
-      <a onClick={logOutUser} className="btn">Logout</a>
-      </>
-      :
-      <a onClick={handleGoogleLogin} className="btn">Login</a>
-    }
+   {
+    dbUser?.email && <Link className='btn btn-success' href={'/@add-post'}>Add New</Link>
+   }
    
   </div>
   <BottomBar/>

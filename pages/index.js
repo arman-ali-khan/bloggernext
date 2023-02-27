@@ -8,11 +8,22 @@ import HomePage from '../components/Home/HomePage'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({data}) {
   return (
      <Layout title={'hello'}>
 {/* <Hero /> */}
-<HomePage />
+<HomePage data={data} />
      </Layout>
   )
+}
+// write a get staticprops function for nextjs dynamic api call
+export async function getStaticProps() {
+  const res = await fetch(`https://blog-server-sparmankhan.vercel.app/blogs`);
+  const data = await res.json();
+console.log(data)
+  return {
+    props: {
+      data,
+    },
+  };
 }

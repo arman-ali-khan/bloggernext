@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {GrHomeOption} from 'react-icons/gr'
 import {FiUser} from 'react-icons/fi'
 import {RxDashboard} from 'react-icons/rx'
@@ -8,24 +8,40 @@ import {BiMessageSquareMinus} from 'react-icons/bi'
 import Sidebar from "../Modal/Sidebar";
 import { contextProvider } from "../../context/AuthContext";
 import Logout from "../Modal/Logout";
+import axios from "axios";
 
 const BottomBar = () => {
   const {googleLogin,user,logOut} = useContext(contextProvider)
+  const [dbUser, setDbUser] = useState({});
 
-  const handleLogout = ()=>{
-    logOut().then(result=>{
-      console.log(result)
-    })
-  }
+      // DB USer
   
-  const handleLogin = ()=>{
-    googleLogin().then(result=>{
-      console.log(result)
-    })
-    .then(err=>{
-      console.error(err);
-    })
-  }
+     useEffect(() => {
+      axios.get(`https://blog-server-sparmankhan.vercel.app/blogs/dbUser?email=${user?.email}`)
+      .then((response) => {
+        setDbUser(response.data);
+      }).catch(function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
+     }, [user]);
+
+  
+
   return (
     <div className="w-full   fixed !z-50 object-center items-center justify-center bottom-12 ">
         
@@ -69,10 +85,10 @@ const BottomBar = () => {
   user?.uid ? 
   <ul tabIndex={0} className="dropdown-content relative menu p-2 shadow bg-base-100 rounded-box w-52">
   <div>
-    <img className="w-16 h-16 rounded-full absolute -top-12 flex justify-center left-16" src={user.photoURL} alt="" />
+    <img className="w-16 h-16 rounded-full absolute -top-12 flex justify-center left-16" src={dbUser.photo} alt="" />
   </div>
    <div></div>
-    <li className=""><a className="text-center flex justify-center">{user.displayName}</a></li>
+    <li className=""><a className="text-center flex justify-center">{dbUser.name}</a></li>
     <li><a>Settings</a></li>
     <li><a>Dashboard</a></li>
     <li>          
@@ -81,8 +97,8 @@ const BottomBar = () => {
   :
   <ul tabIndex={0} className="dropdown-content relative menu p-2 shadow bg-base-100 rounded-box w-52">
    <div></div>
-    <li><a onClick={()=>handleLogin()}>Login</a></li>
-    <li><a>Signup</a></li>
+    <li><Link href={'/login'}>Login</Link></li>
+    <li><Link href={'/register'}>Signup</Link></li>
   </ul>
 }
 </div>

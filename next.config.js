@@ -3,4 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+module.exports = {
+  env: {
+    GREETING: process.env.GREETING,
+  },
+}, nextConfig
