@@ -10,12 +10,13 @@ import Author from '../../components/Home/Author/Author';
 
 const blog = ({data}) => {
  
-  console.log(data)
   const post = data.body
+  const socialBody = parse(data.body)
+  console.log(socialBody)
     const router = useRouter()
     const id = router.query.blogId
     return (
-        <Layout title={data.title} description={data.body} body={data.body} thumb={data.thumb}>
+        <Layout title={data.title} description={socialBody} body={data.body} thumb={data.thumb}>
            <div className='md:flex w-full '>
             <div className='md:w-full m-4'>
             <div className="mx-auto md:p-2 dark:bg-gray-800 ">
@@ -55,7 +56,7 @@ export const getStaticPaths = async () => {
     //fetch data from api
     const res = await fetch(`https://blog-server-sparmankhan.vercel.app/blogs`);
     const data = await res.json();
-  console.log(data)
+ 
     //create paths for each item in the data
     const paths = data.map(item => ({
       params: {

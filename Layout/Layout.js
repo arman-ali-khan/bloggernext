@@ -14,7 +14,7 @@ const Layout = ({children,title,description,body,thumb}) => {
         <meta property="og:title" content={title} />
         <meta
           property="og:description"
-          content={'Hello Facebook'}
+          content={description}
         />
         <meta
           property="og:image"
