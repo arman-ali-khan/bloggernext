@@ -67,6 +67,9 @@ const Register = () => {
                   email: data.email,
                   username: data.username,
                   photo: photoUrl,
+                  followers: '0',
+                  role:'user'
+
                 };
 
                 fetch(`https://blog-server-sparmankhan.vercel.app/blogs/user`, {
@@ -132,7 +135,7 @@ const Register = () => {
                     onChange={(e) =>
                       setUserCheck(e.target.value.toLocaleLowerCase())
                     }
-                    type="username"
+                    type="text"
                     placeholder="Username"
                     className={`input input-bordered ${
                       userName.length > 0 && "border-error"

@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthorPost from './AuthorPost';
 
-const Author = () => {
+const Author = ({data}) => {
     return (
 <div className="font-sans leading-tight bg-grey-lighter ">
     <div className="w-full md:max-w-sm bg-white rounded-lg flex flex-col sm:flex-row items-center sm:justify-between justify-center md:block overflow-hidden shadow-lg">
@@ -49,7 +49,7 @@ const Author = () => {
            </div>
         </div>
     </div>
-    <AuthorPost />
+    <AuthorPost data={data} />
 </div>
     );
 };

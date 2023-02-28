@@ -15,17 +15,17 @@ const blog = ({data}) => {
     const router = useRouter()
     const id = router.query.blogId
     return (
-        <Layout title={data.title} description={socialBody} body={data.body} thumb={data.thumb}>
+        <Layout title={`${data.title} || Next Blog`} description={socialBody} body={data.body} thumb={data.thumb}>
            <div className='md:flex w-full '>
             <div className='md:w-full m-4'>
             <div className="mx-auto md:p-2 dark:bg-gray-800 ">
 	<div className="flex flex-col mx-auto overflow-hidden rounded">
-		<img src={data.thumb} alt="" className="w-full h-60 sm:h-96 dark:bg-gray-500" />
+		<img src={data.thumb} alt="" className="w-full h-60 sm:h-96 object-cover object-center dark:bg-gray-500" />
 		<div className="p-2 pb-12 mx-auto -mt-16 space-y-6 sm:px-3 sm:mx-3 lg:mx-12 rounded-xl border bg-white">
 			<div className="space-y-2 ">
 				<h4  className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</h4>
 				<p className="text-sm ">By{" "}
-					<Link rel="noopener noreferrer" href="#" className="text-xs hover:underline">{data.user.name}</Link>
+					<Link rel="noopener noreferrer" href="#" className="text-xs hover:underline">{data.name}</Link>
 				</p>
 			</div>
 			<div className="">
@@ -38,7 +38,7 @@ const blog = ({data}) => {
 </div>
             </div>
             <div className='md:w-4/12 m-4 '>
-              <Author />
+              <Author data={data} />
             </div>
         </div>
         </Layout>

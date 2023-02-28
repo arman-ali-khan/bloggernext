@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
-var Editor = dynamic(() => import("../../components/Editor/Editor"), {
+var Editor = dynamic((e) => import("../../components/Editor/Editor"), {
   ssr: false
 })
 

@@ -10,7 +10,7 @@ const Layout = ({children,title,description,body,thumb}) => {
             <Navbar />
              <Head>
              <title>{title}</title>
-        <meta name="description" content={'Hello World'} key="desc" />
+        <meta name="description" content={description} key="desc" />
         <meta property="og:title" content={title} />
         <meta
           property="og:description"

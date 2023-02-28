@@ -3,13 +3,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import BottomBar from './BottomBar';
 import Link from 'next/link';
 import axios from 'axios';
+import { GrAddCircle } from 'react-icons/gr';
 
 const Navbar = () => {
   const {googleLogin,user,logOut,dbUser} = useContext(contextProvider)
 
 
     return (
-        <div className="navbar bg-base-100 border">
+        <div className="navbar !p-0">
+  <div className='navbar bg-base-100 !p-4 !py-0 mx-3 sm:mx-auto border md:w-9/12 rounded-b-3xl'>
   <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -30,7 +32,7 @@ const Navbar = () => {
         <li><a>Item 3</a></li>
       </ul>
     </div>
-    <Link href={'/'} className="btn btn-ghost normal-case text-xl">Home</Link>
+    <Link href={'/'} className=" normal-case text-xl">Home</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -50,9 +52,16 @@ const Navbar = () => {
   </div>
   <div className="navbar-end">
    {
-    dbUser?.email && <Link className='btn btn-success' href={'/@add-post'}>Add New</Link>
+    dbUser?.role==='user' ? <Link className='text-3xl' href={'/@add-post'}>
+      <GrAddCircle />
+    </Link>
+    :
+    <Link className='text-3xl' href={'/login'}>
+    <GrAddCircle />
+  </Link>
    }
    
+  </div>
   </div>
   <BottomBar/>
 </div>

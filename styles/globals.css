@@ -58,4 +58,28 @@ h6 {
     }
 
 
-   
+   table{
+   border: 1px solid #aaa;
+   padding: 0 5px
+   }
+
+   table tr {
+    border : 1px solid #aaa;
+    padding: 0 5px
+   }
+
+   table tr td {
+    border : 1px solid #aaa;
+    padding: 0 5px
+   }
+
+
+   ul li {
+    list-style: inside;
+}
+
+
+ol li {
+    list-style: decimal;
+    margin: 0 0 0 16px;
+}
