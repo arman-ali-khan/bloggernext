@@ -4,9 +4,13 @@ import Layout from '../../Layout/Layout';
 import { useRouter } from 'next/router';
 import React from 'react';
 import parse from 'html-react-parser';
+import Link from 'next/link';
+import Author from '../../components/Home/Author/Author';
 
 
 const blog = ({data}) => {
+ 
+  console.log(data)
   const post = data.body
     const router = useRouter()
     const id = router.query.blogId
@@ -14,14 +18,14 @@ const blog = ({data}) => {
         <Layout title={data.title} description={data.body} body={data.body} thumb={data.thumb}>
            <div className='md:flex w-full '>
             <div className='md:w-full m-4'>
-            <div className="mx-auto sm:p-10 md:p-6 dark:bg-gray-800 ">
+            <div className="mx-auto md:p-2 dark:bg-gray-800 ">
 	<div className="flex flex-col mx-auto overflow-hidden rounded">
 		<img src={data.thumb} alt="" className="w-full h-60 sm:h-96 dark:bg-gray-500" />
-		<div className="p-6 pb-12  m-4 mx-auto -mt-16 space-y-6 sm:px-10 sm:mx-12 lg:rounded-md bg-gray-100">
+		<div className="p-2 pb-12 mx-auto -mt-16 space-y-6 sm:px-3 sm:mx-3 lg:mx-12 rounded-xl border bg-white">
 			<div className="space-y-2 ">
 				<h4  className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</h4>
-				<p className="text-xs ">By
-					<a rel="noopener noreferrer" href="#" className="text-xs hover:underline">Leroy Jenkins</a>
+				<p className="text-sm ">By{" "}
+					<Link rel="noopener noreferrer" href="#" className="text-xs hover:underline">{data.user.name}</Link>
 				</p>
 			</div>
 			<div className="">
@@ -34,7 +38,7 @@ const blog = ({data}) => {
 </div>
             </div>
             <div className='md:w-4/12 m-4 '>
-              <Popular />
+              <Author />
             </div>
         </div>
         </Layout>

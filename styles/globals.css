@@ -38,8 +38,16 @@ h6 {
 }
 
 
-  
-    
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    height: 300px;
+}
+.css-13cymwt-control {
+    padding: 6px 3px;
+}
+
+.css-t3ipsp-control {
+    padding: 6px 3px;
+}
     .postbody a{
     color: blue;
     
