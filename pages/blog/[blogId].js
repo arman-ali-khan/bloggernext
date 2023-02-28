@@ -11,8 +11,7 @@ import Author from '../../components/Home/Author/Author';
 const blog = ({data}) => {
  
   const post = data.body
-  const socialBody = parse(data.body)
-  console.log(socialBody)
+  const socialBody = post.replace(/<\/?[^>]+>/gi, '')
     const router = useRouter()
     const id = router.query.blogId
     return (
