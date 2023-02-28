@@ -7,8 +7,9 @@ import Layout from "../../Layout/Layout";
 
 const Register = () => {
   const { createUser, handleUserUpdate } = useContext(contextProvider);
-
-  const router = useRouter()
+  const [value, setValue] = useState("");
+  console.log(value);
+  const router = useRouter();
 
   const {
     register,
@@ -17,10 +18,14 @@ const Register = () => {
   } = useForm();
 
   const [userCheck, setUserCheck] = useState("");
+  const userNameCase = userCheck.split(" ")
+  console.log(userNameCase);
   const [userName, setUserName] = useState([]);
   // console.log(usernameMatch)
   useEffect(() => {
-    fetch(`https://blog-server-sparmankhan.vercel.app/blogs/username?name=${userCheck}`)
+    fetch(
+      `https://blog-server-sparmankhan.vercel.app/username?name=${userCheck}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setUserName(data);
@@ -57,25 +62,23 @@ const Register = () => {
                 photoURL: photoUrl,
               };
               handleUserUpdate(profile).then((result) => {
-
                 const userData = {
                   name: data.name,
                   email: data.email,
                   username: data.username,
-                  photo: photoUrl
+                  photo: photoUrl,
+                };
 
-                }
-
-                fetch(`https://blog-server-sparmankhan.vercel.app/blogs/user`,{
-                  method:'POST',
-                  headers:{
-                    'content-type':'application/json'
+                fetch(`https://blog-server-sparmankhan.vercel.app/blogs/user`, {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
                   },
-                  body: JSON.stringify(userData)
-                })
+                  body: JSON.stringify(userData),
+                });
 
                 console.log(result);
-                router.push('/')
+                router.push("/");
               });
             })
             .catch((err) => {
@@ -84,11 +87,7 @@ const Register = () => {
         }
       })
       .catch((err) => console.log(err));
-
-  
   };
-
-
 
   const [show, setShow] = useState(false);
   // console.log(show)
@@ -130,14 +129,18 @@ const Register = () => {
 
                   <input
                     {...register("username")}
-                    onChange={(e) => setUserCheck(e.target.value)}
+                    onChange={(e) =>
+                      setUserCheck(e.target.value.toLocaleLowerCase())
+                    }
                     type="username"
                     placeholder="Username"
                     className={`input input-bordered ${
                       userName.length > 0 && "border-error"
                     }`}
                   />
-
+                  <p className="text-error my-1">
+                    {userNameCase.length > 1 && `Space not alowed`}
+                  </p>
                   <p className="text-error my-1">
                     {userName.length > 0 ? `Already Use this username` : ``}
                   </p>
@@ -150,7 +153,7 @@ const Register = () => {
 
                   <input
                     {...register("photo")}
-                    className="file-input file-input-bordered"
+                    className="file-input lowercase file-input-bordered"
                     type="file"
                     placeholder="Username"
                   />
@@ -199,7 +202,12 @@ const Register = () => {
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button disabled={userName.length>0} className="btn btn-primary">Create Account</button>
+                  <button
+                    disabled={userName.length > 0}
+                    className="btn btn-primary"
+                  >
+                    Create Account
+                  </button>
                 </div>
               </div>
             </div>

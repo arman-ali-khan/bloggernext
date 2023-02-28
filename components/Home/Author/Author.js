@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthorPost from './AuthorPost';
 
 const Author = () => {
     return (
@@ -48,6 +49,7 @@ const Author = () => {
            </div>
         </div>
     </div>
+    <AuthorPost />
 </div>
     );
 };
