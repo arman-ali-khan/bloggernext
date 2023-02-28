@@ -12,8 +12,8 @@ const AuthorPost = () => {
                 <img className='w-20 h-16 rounded-xl' src="http://res.cloudinary.com/dcckbmhft/image/upload/v1677566269/nextblog/mbw2pmncpq1nefuoa7nt.webp" alt="" />
             </div>
             <div className='w-full'>
-                <h2 className='text-base font-semibold'>How does a browser run  browser run JavaScript?</h2>
-                <p className='text-sm'>3 Days ago</p>
+                <h2 className='text-base font-semibold'>How does does a browser run  browser run JavaScript?</h2>
+                <p className='text-xs'>3 Days ago</p>
             </div>
         </div>
         <div className='flex  gap-1'>
@@ -22,7 +22,7 @@ const AuthorPost = () => {
             </div>
             <div className='w-full'>
                 <h2 className='text-base font-semibold'>How does a browser run  browser run JavaScript?</h2>
-                <p className='text-sm'>3 Days ago</p>
+                <p className='text-xs'>3 Days ago</p>
             </div>
         </div>
        </div>
