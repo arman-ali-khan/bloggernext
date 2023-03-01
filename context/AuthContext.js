@@ -45,7 +45,7 @@ console.log(dbUser)
         }
         console.log(error.config);
       });
-     }, [user.email]);
+     }, [user?.email]);
 
   const googleProvider = new GoogleAuthProvider();
 

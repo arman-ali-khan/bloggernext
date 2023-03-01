@@ -39,7 +39,7 @@ const Register = () => {
     const photo = data.photo[0];
 
     const name = data.name;
-    const email = data.email;
+    const email = data?.email;
     const password = data.password;
     const photoData = new FormData();
     photoData.append("file", photo);
@@ -64,7 +64,7 @@ const Register = () => {
               handleUserUpdate(profile).then((result) => {
                 const userData = {
                   name: data.name,
-                  email: data.email,
+                  email: data?.email,
                   username: data.username,
                   photo: photoUrl,
                   followers: '0',

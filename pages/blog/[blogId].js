@@ -27,7 +27,7 @@ const blog = ({data}) => {
 				<h4  className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</h4>
       {/* Post action */}
      {
-      data.email === user.email &&  <div className='flex items-center gap-3'>
+      data?.email === user?.email &&  <div className='flex items-center gap-3'>
       <Link className='bg-blue-100 text-blue-600 px-3 rounded-full py-1' href={`/edit/${data.id}`}>Edit</Link>
       <Link className='bg-rose-100 text-rose-600 px-3 rounded-full py-1' href={'#'}>Delete</Link>
       </div>

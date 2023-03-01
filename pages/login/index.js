@@ -12,7 +12,7 @@ const index = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const handleLoginUser = (data)=>{
-        const email = data.email;
+        const email = data?.email;
         const password = data.password;
         userLogin(email,password).then(result=>{
             router.push('/')
@@ -34,7 +34,7 @@ const index = () => {
           </label>
           <input {...register('email')} type="email" placeholder="email" className="input input-bordered" />
           <p className='text-error'> 
-          {errors.email && errors.email.type === "required" && <span>Email Required</span>}
+          {errors?.email && errors?.email.type === "required" && <span>Email Required</span>}
           </p>
         </div>
         <div className="form-control relative">
