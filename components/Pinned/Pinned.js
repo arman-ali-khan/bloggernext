@@ -6,7 +6,7 @@ import { BiBookmarkAlt } from 'react-icons/bi';
 const Pinned = () => {
   const [featured,setFeatured] = useState([])
   useEffect(()=>{
-    axios.get('http://localhost:5000/featured')
+    axios.get('https://blog-server-sparmankhan.vercel.app/featured')
     .then(res=>{
       setFeatured(res.data[0].blog)
     })
