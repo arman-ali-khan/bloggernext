@@ -56,7 +56,7 @@ const BottomBar = () => {
 
   {/* USer Menu */}
 {
-  user?.uid ? 
+  dbUser  ? 
   <ul tabIndex={0} className="dropdown-content relative menu p-2 shadow bg-base-100 rounded-box w-52">
   <div>
     <img className="w-16 h-16 rounded-full absolute -top-12 flex justify-center left-16" src={dbUser.photo} alt="" />

@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { contextProvider } from "../context/AuthContext";
 import Layout from "../Layout/Layout";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { toast } from "react-hot-toast";
 
 
 
@@ -14,7 +15,7 @@ const userId = () => {
   const id = router.query.userId?.split('@').join('')
   const [user,setUser] = useState({})
  useEffect(() => {
-    axios.get(`http://localhost:5000/user?username=${id}`)
+    axios.get(`https://blog-server-sparmankhan.vercel.app/user?username=${id}`)
     .then(res=>{
         setUser(res.data)
     })
@@ -55,7 +56,7 @@ const userId = () => {
               >
                 <li>
                 <CopyToClipboard text={`https://bloggernext.vercel.app/@${id}`}>
-                  <button class="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200">
+                  <button onClick={()=>{toast.success('copy to clipboard')}} class="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4 text-gray-400"
@@ -125,7 +126,7 @@ const userId = () => {
           <div class="flex flex-col items-center -mt-20">
             <img
               src={user?.photo}
-              class="w-40 border-4 border-white rounded-full"
+              class="w-40 border-4 h-40 bg-blue-100 bg-opacity-50 border-blue-300 object-cover object-center rounded-full"
             />
             <div class="flex items-center space-x-2 mt-2">
               <div class="text-2xl">{user.name}</div>

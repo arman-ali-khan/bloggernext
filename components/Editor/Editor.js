@@ -10,6 +10,7 @@ import { contextProvider } from "../../context/AuthContext";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 function Editor() {
   const {
@@ -22,11 +23,11 @@ function Editor() {
 
   const [file, setFile] = useState();
   function handleChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    setFile(URL?.createObjectURL(e.target.files[0]));
   }
 
   let [loaded, setLoaded] = useState(false);
+  let [photUploading, setphotUploading] = useState(false);
   const [postId, setPostId] = useState(0);
 
   // React Select
@@ -67,7 +68,7 @@ function Editor() {
   const [postBody, setpostBody] = useState("");
 
   const handlePostSubmit = (data) => {
-    setPosting(true);
+    setphotUploading(true)
     const photo = data.photo[0];
     const photoData = new FormData();
     photoData.append("file", photo);
@@ -79,6 +80,8 @@ function Editor() {
     })
       .then((resp) => resp.json())
       .then((photoData) => {
+        setphotUploading(false)
+        setPosting(true)
         const photoUrl = photoData.url;
         const postData = {
           title: data.title,
@@ -106,6 +109,7 @@ function Editor() {
             console.log(data);
             setPosting(false);
             reset();
+            toast.success('Post Created!')
           });
       });
 
@@ -153,23 +157,47 @@ function Editor() {
                 />
               </label>
               <div className="flex items-center my-2 justify-between gap-2">
-                <label className="lg:w-9/12 w-full">
+                <label className=" w-full">
                   <p> Featured Image </p>
+                  <div className="flex justify-center">
+                  <label>
                   <input
                     accept="image/*"
                     {...register("photo", { required: true })}
-                    className="file-input file-input-bordered w-full"
+                    className="file-input hidden file-input-bordered w-full"
                     type="file"
                     onChange={handleChange}
                   />
+                  
+                  <div className="flex relative justify-center w-full">
+                   {
+                    file ?'':  <div className="border border-dashed p-12">
+                      <h3>Click and upload</h3>
+                    </div>
+                   } 
+                   </div>
+                   </label>
+               <div className="relative">
+               {
+                  file ? <>
+                   <img
+                  className="h-44 w-44 rounded-md object-cover"
+                  src={file}
+                  alt=""
+                />
+                
+                  </>:''
+                 } {
+                    file &&   <button className="absolute  bg-red-100 text-rose-500 px-2 top-0 right-0 rounded-full flex justify-self-center" onClick={()=>setFile('')}>Remove</button>
+                  }
+               </div>
+                  </div>
+               
+               
+                  
+                 
                 </label>
-                <div className="">
-                  <img
-                    className="h-24 w-32 rounded-md object-cover"
-                    src={file}
-                    alt=""
-                  />
-                </div>
+                
               </div>
             </div>
             <CKEditor
@@ -204,7 +232,8 @@ function Editor() {
             </div>
             <div className="flex justify-center">
               <button className="btn " type="submit">
-                {posting ? "Creating" : "Create Post"}
+                {posting && "Creating"}
+                { photUploading ? 'Photo Uploading' : 'Create Post'}
               </button>
             </div>
           </form>
