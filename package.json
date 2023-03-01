@@ -30,7 +30,9 @@
     "react-hook-form": "^7.43.2",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
-    "react-select": "^5.7.0"
+    "react-select": "^5.7.0",
+    "suneditor": "^2.44.3",
+    "suneditor-react": "^3.4.1"
   },
   "devDependencies": {
     "@types/react": "18.0.28",

@@ -12,14 +12,14 @@ import axios from "axios";
 
 const BottomBar = () => {
   const {googleLogin,user,logOut,dbUser} = useContext(contextProvider)
- console.log(dbUser)
+
 
   
 
   return (
     <div className="w-full fixed !z-50 object-center items-center justify-center bottom-12 ">
         
-      <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-white md:bg-opacity-20 bg-blue-200 opacity-90 md:bg-blue-900  rounded-full">
+      <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-white md:bg-opacity-70 bg-blue-200 opacity-90 md:bg-blue-300  rounded-full">
        
         <ul className="flex relative justify-center ">
           <li className="list-none">

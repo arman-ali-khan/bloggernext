@@ -24,7 +24,7 @@ const Recent = ({data:posts}) => {
         <p>
           <span>in</span> Ghost Story
         </p>
-        <Link  href={`/blog/${post.id}`} className="text-xl leading-3 text-blue-600 font-bold">
+        <Link  href={`/blog/${post.id}`} className="text-xl leading-3 break-words text-blue-600 font-bold">
         {post.title}
         </Link>
 

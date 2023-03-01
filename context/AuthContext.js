@@ -16,7 +16,6 @@ import axios from "axios";
 export const contextProvider = createContext();
 export const auth = getAuth(app);
 const AuthContext = ({ children }) => {
-  const arman = "Samrat";
   const [user, setUser] = useState({});
   const [dbUser, setDbUser] = useState({});
 
@@ -46,7 +45,7 @@ console.log(dbUser)
         }
         console.log(error.config);
       });
-     }, [user]);
+     }, [user.email]);
 
   const googleProvider = new GoogleAuthProvider();
 
@@ -85,7 +84,6 @@ console.log(dbUser)
     createUser,
     handleUserUpdate,
     logOut,
-    arman,
   };
   return (
     <contextProvider.Provider value={info}>{children}</contextProvider.Provider>

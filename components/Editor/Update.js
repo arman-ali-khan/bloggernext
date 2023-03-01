@@ -11,17 +11,29 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
-function Editor() {
+function Update({editPost}) {
+  
+
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+        categories: editPost.categories,
+      tags: editPost.categories,
+      body: editPost.body,
+      thumb: editPost.thumb,
+      title: editPost.title,
+    }
+  });
   const [posting, setPosting] = useState(false);
 
   const [file, setFile] = useState();
+
   function handleChange(e) {
     setFile(URL?.createObjectURL(e.target.files[0]));
   }
@@ -35,11 +47,11 @@ function Editor() {
 
   // Category
   const [categories, setCategories] = useState([]);
-  console.log(categories);
+
 
   // Tags
   const [tags, setTags] = useState([]);
-  console.log(tags);
+
 
   const [options, setOptions] = useState([]);
 
@@ -59,7 +71,7 @@ function Editor() {
       });
   }, []);
   const { user,dbUser } = useContext(contextProvider);
-  console.log(postId);
+  
 
   useEffect(() => {
     setLoaded(true);
@@ -70,6 +82,7 @@ function Editor() {
   const handlePostSubmit = (data) => {
     setphotUploading(true)
     const photo = data.photo[0];
+console.log(photo)
     const photoData = new FormData();
     photoData.append("file", photo);
     photoData.append("upload_preset", "nextblog");
@@ -83,34 +96,31 @@ function Editor() {
         setphotUploading(false)
         setPosting(true)
         const photoUrl = photoData.url;
-        const postData = {
-          title: data.title,
-          thumb: photoUrl,
-          categories: categories,
-          tags: tags,
-          body: postBody.data,
-          id: postId.toString(),
-          view: "0",
-          name: user.displayName,
-          email: user.email,
-          photo: user.photoURL,
-          username: dbUser.username,
-          like: '0'
-        };
-        fetch("https://blog-server-sparmankhan.vercel.app/blogs", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(postData),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            setPosting(false);
-            reset();
-            toast.success('Post Created!')
-          });
+        if(photoUrl){
+            const postData = {
+                title: data.title,
+                thumb: photoUrl,
+                categories: categories,
+                tags: tags,
+                body: postBody.data,
+              };
+              fetch(`https://blog-server-sparmankhan.vercel.app/post/${editPost.id}`, {
+                method: "PATCH",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(postData),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log(data);
+                  setPosting(false);
+                 toast.success('Post Update')
+                });
+            }
+            else{
+                toast.error('Photo Upload Faild!')
+            }
       });
 
     // fetch('https://blog-server-sparmankhan.vercel.app/blogs',{
@@ -125,10 +135,12 @@ function Editor() {
     // })
   };
 
+  
+
   if (loaded) {
     return (
       <>
-        <Layout title={"Add New Post"}>
+        <Layout title={`Update ${editPost.title}`}>
           <form
             onSubmit={handleSubmit(handlePostSubmit)}
             className="lg:w-6/12 my-12 md:w-9/12 mx-3 md:mx-auto"
@@ -137,8 +149,8 @@ function Editor() {
               {/* Title */}
               <label>
                 <p>Title </p>
-                <input
-                  {...register("title", { required: true })}
+                <input defaultValue={editPost.title}
+                  {...register("title", { required: false })}
                   className="input w-full input-bordered"
                   type="text"
                 />
@@ -146,39 +158,43 @@ function Editor() {
 
               {/* Category */}
               <label>
-                <p>Title </p>
-                <Select
+                <p>Category </p>
+                {
+                    editPost.categories && <Select
                   className="py-3"
                   closeMenuOnSelect={false}
                   components={animatedComponents}
                   isMulti
+                  defaultValue={editPost.categories}
                   onChange={(e) => setCategories(e)}
                   options={options}
                 />
+                }
+                
               </label>
               <div className="flex items-center my-2 justify-between gap-2">
                 <label className=" w-full">
                   <p> Featured Image </p>
-                  <div className="flex justify-center">
+                  <div className="flex items-center justify-center">
                   <label>
                   <input
                     accept="image/*"
                     {...register("photo", { required: true })}
-                    className="file-input hidden file-input-bordered w-full"
+                    className="file-input  file-input-bordered w-full"
                     type="file"
                     onChange={handleChange}
                   />
                   
                   <div className="flex relative justify-center w-full">
                    {
-                    file ?'':  <div className="border border-dashed p-12">
-                      <h3>Click and upload</h3>
+                    file ? "":  <div className="border border-dashed p-12">
+                      <h3><img src={editPost.thumb} alt="" /></h3>
                     </div>
                    } 
                    </div>
                    </label>
                <div className="relative">
-               {
+               { file &&
                   file ? <>
                    <img
                   className="h-44 w-44 rounded-md object-cover"
@@ -187,9 +203,12 @@ function Editor() {
                 />
                 
                   </>:''
-                 } {
-                    file &&   <button className="absolute  bg-red-100 text-rose-500 px-2 top-0 right-0 rounded-full flex justify-self-center" onClick={()=>setFile('')}>Remove</button>
-                  }
+                 } 
+                {
+                    file!=='https://as2.ftcdn.net/v2/jpg/01/64/16/59/1000_F_164165971_ELxPPwdwHYEhg4vZ3F4Ej7OmZVzqq4Ov.jpg' ?  
+                        editPost.thumb ?   <button className="absolute  bg-red-100 text-rose-500 px-2 top-0 right-0 rounded-full flex justify-self-center" onClick={()=>setFile('https://as2.ftcdn.net/v2/jpg/01/64/16/59/1000_F_164165971_ELxPPwdwHYEhg4vZ3F4Ej7OmZVzqq4Ov.jpg')}>Remove</button>:''
+                      :''
+                }
                </div>
                   </div>
                
@@ -203,7 +222,7 @@ function Editor() {
             <CKEditor
               className="h-96"
               editor={ClassicEditor}
-              data=""
+              data={editPost.body}
               onReady={(editor) => {
                 // You can store the "editor" and use when it is needed.
                 console.log("Editor is ready to use!", editor);
@@ -222,18 +241,21 @@ function Editor() {
             />
             <div className="my-2">
               <p>Tags</p>
-              <CreatableSelect
+              {
+                editPost?.tags && <CreatableSelect
                 components={animatedComponents}
                 isClearable
                 isMulti
+                defaultValue={editPost?.tags}
                 options={options}
                 onChange={(e) => setTags(e)}
               />
+              }
             </div>
             <div className="flex justify-center">
-              <button disabled={!file} className={`btn btn-success`} type="submit">
-                {posting && "Creating"}
-                { photUploading ? 'Photo Uploading' : 'Create Post'}
+              <button className="btn " type="submit">
+                {posting && "Updating..."}
+                { photUploading ? 'Photo Uploading...' : 'Update Post'}
               </button>
             </div>
           </form>
@@ -246,4 +268,4 @@ function Editor() {
   }
 }
 
-export default Editor;
+export default Update;

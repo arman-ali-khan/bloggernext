@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+body {
+    font-family: 'BenSen', 'Poppins', sans-serif !important;
+}
+
+
+
+
+
 h1 { 
     font-size: 2.25rem/* 36px */;
     line-height: 2.5rem/* 40px */;
     font-weight: 700;
 
 }
+
+
+
 h2 { 
     font-size: 1.875rem/* 30px */;
     line-height: 2.25rem/* 36px */;
