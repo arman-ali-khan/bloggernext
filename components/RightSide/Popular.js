@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import SinglePopular from './SinglePopular';
 
 const Popular = () => {
   const [populars,setPopulars] =useState([])
@@ -51,31 +52,7 @@ const Popular = () => {
      
       <div className='flex flex-col gap-2'>
         {
-          populars.map(post=><div key={post.id} className='w-full gap-2 items-center  border border-gray-700 shadow-lg px-2  rounded-xl '>
-     <div>
-     </div>
-      <div className='w-full'>
-       
-        <div className='flex sm:flex-col gap-2 items-center'>
-        <div className='w-32 h-24  sm:w-full'>
-          <img src={post.thumb} className='w-32 sm:w-full object-cover rounded-md h-24' alt="" />
-        </div>
-        <div className='w-full'>
-        <div className='text-xs flex justify-between'>
-        <p><span>in</span> {post.categories[0]?.label}</p>
-        <p>Like: {post.like}</p>
-        </div>
-        <Link href={`/blog/${post.id}`} className='text-base  font-bold'>{post.title.split(' ').slice(0,13).join(' ')}{post.title.split(' ').length>13 && '...'}</Link>
-        <div className='flex justify-between text-xs'>
-<p>Published 12 June 2023   </p> 
-<p>View {post?.view}</p>
-</div>
-        </div>
-        </div>
-
-
-      </div>
-        </div>)
+          populars.map(post=><SinglePopular key={post.id} post={post} />)
         }
          
        </div>}

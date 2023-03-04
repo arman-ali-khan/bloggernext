@@ -36,6 +36,26 @@ const blog = ({data}) => {
    })
    
  },[data,commented])
+ const view = parseInt(data.view) +1
+ const postView = {
+  view: view.toString()
+ }
+ 
+ useEffect(()=>{
+  fetch(`https://blog-server-sparmankhan.vercel.app/view/${data._id}`,{
+    method: 'PATCH',
+    headers: {
+      'content-type':'application/json'
+    },
+    body: JSON.stringify(postView)
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data)
+  })
+ },[])
+
+
 
     return (
         <Layout title={`${data.title} || Next Blogger`} description={socialBody} body={data.body} thumb={data.thumb}>

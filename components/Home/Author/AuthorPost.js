@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 const AuthorPost = ({data}) => {
-    // http://localhost:5000/post?email=armankhan@gmail.com
+    // https://blog-server-sparmankhan.vercel.app/post?email=armankhan@gmail.com
     
     const [posts,setPosts] = useState([])
     axios.get(`https://blog-server-sparmankhan.vercel.app/post?email=${data?.email}`)
@@ -30,9 +30,9 @@ const AuthorPost = ({data}) => {
         }
        
        </div>
-       <div className='border flex justify-center rounded-md w-full '>
+       {/* <div className='border flex justify-center rounded-md w-full '>
         <Link href={`/@${posts[0]?.username}`} className='py-2 text-center w-full'>See More</Link>
-       </div>
+       </div> */}
        </div>
     );
 };

@@ -9,7 +9,6 @@ import Sidebar from "../Modal/Sidebar";
 import { contextProvider } from "../../context/AuthContext";
 import Logout from "../Modal/Logout";
 import axios from "axios";
-import logo from '../../logo/logo.svg'
 
 const BottomBar = () => {
   const {googleLogin,user,logOut,dbUser} = useContext(contextProvider)

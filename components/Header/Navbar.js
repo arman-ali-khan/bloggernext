@@ -6,6 +6,7 @@ import axios from 'axios';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { RiAddCircleFill, RiAddCircleLine } from 'react-icons/ri';
 
+
 const Navbar = () => {
   const {googleLogin,user,logOut,dbUser} = useContext(contextProvider)
 
@@ -56,11 +57,20 @@ const Navbar = () => {
       </li>
       </ul>
     </div>
-    <Link href={'/'} className=" normal-case text-xl">Home</Link>
+    <Link href={'/'} className=" normal-case text-xl w-8 sm:w-12 h-8 sm:h-12">
+      <img className='sm:w-12 sm:h-12 w-8
+h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamodifier-Design_tcxawk.svg' alt="" />
+      </Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 bg-transparent">
-      <li><a>Home</a></li>
+   
+      <li tabIndex={0}>
+      <Link href={'/'} className=" ">
+      Home
+      </Link>
+        
+      </li>
       <li tabIndex={0}>
         <a>
         Android
