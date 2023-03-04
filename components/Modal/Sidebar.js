@@ -2,8 +2,8 @@ import React from 'react';
 
 const Sidebar = () => {
     return (
-        <div className=' hidden  left-0 top-16'>
-            <div className="drawer">
+        <div className=' hidden fixed left-0 top-16'>
+            <div className="drawer ">
   <input id="my-drawer" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content"></div>
   <div className="drawer-side">

@@ -16,6 +16,7 @@ import axios from "axios";
 export const contextProvider = createContext();
 export const auth = getAuth(app);
 const AuthContext = ({ children }) => {
+  const [commented,setCommented] = useState(false)
   const [user, setUser] = useState({});
   const [dbUser, setDbUser] = useState({});
 
@@ -84,6 +85,8 @@ console.log(dbUser)
     createUser,
     handleUserUpdate,
     logOut,
+    commented,
+    setCommented,
   };
   return (
     <contextProvider.Provider value={info}>{children}</contextProvider.Provider>

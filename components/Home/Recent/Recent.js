@@ -5,12 +5,12 @@ const Recent = ({data:posts}) => {
   console.log(posts)
   return (
    <div>
-    <div className="w-full px-2 bg-blue-100 text-blue-600 rounded-md my-2 font-bold py-2">
+    <div className="w-full px-2 shadow bg-gray-700  rounded-md my-2 font-bold py-2">
       <h3 className="text-xl ">Recent Posts</h3>
     </div>
      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
       {
-        posts.map(post=> <div key={post.id} className="w-full gap-2 items-center  bg-gray-200 px-2 rounded-xl ">
+        posts.map(post=> <div key={post.id} className="w-full gap-2 items-center   px-2 shadow-lg border border-gray-700 rounded-xl ">
       <div>
         <div className="w-68 h-32">
           <img
@@ -21,16 +21,17 @@ const Recent = ({data:posts}) => {
         </div>
       </div>
       <div className="w-full">
-        <p>
-          <span>in</span> Ghost Story
-        </p>
-        <Link  href={`/blog/${post.id}`} className="text-xl leading-3 break-words text-blue-600 font-bold">
-        {post.title}
+      <div className='text-xs flex justify-between'>
+        <p><span>in</span> {post.categories[0]?.label}</p>
+        <p>Like: {post.like}</p>
+        </div>
+        <Link  href={`/blog/${post.id}`} className={` leading-3 text-base break-words  font-bold`}>
+        {post.title.split(' ').slice(0,13).join(' ')}{post.title.split(' ').length>13 && '...'}
         </Link>
 
-        <div className="flex justify-between">
-          <p>Published 12 June 2023 </p>
-          <Link href={`/blog/${post.id}`}>Read More</Link>
+        <div className="flex justify-between text-xs">
+          <p>2 days ago </p>
+          <p>View {post?.view}</p>
         </div>
       </div>
     </div>)

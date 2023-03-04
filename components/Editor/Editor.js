@@ -11,6 +11,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import './custom.css';
 
 function Editor() {
   const {
@@ -25,6 +26,17 @@ function Editor() {
   function handleChange(e) {
     setFile(URL?.createObjectURL(e.target.files[0]));
   }
+
+  ClassicEditor
+  .create( /* ... */ )
+  .then( editor => {
+      console.log( editor );
+  } )
+  .catch( err => {
+      console.error( err.stack );
+  } );
+
+
 
   let [loaded, setLoaded] = useState(false);
   let [photUploading, setphotUploading] = useState(false);
@@ -146,9 +158,9 @@ function Editor() {
 
               {/* Category */}
               <label>
-                <p>Title </p>
+                <p>Category </p>
                 <Select
-                  className="py-3"
+                  className="py-3 bg-transparent"
                   closeMenuOnSelect={false}
                   components={animatedComponents}
                   isMulti
@@ -163,7 +175,7 @@ function Editor() {
                   <label>
                   <input
                     accept="image/*"
-                    {...register("photo", { required: true })}
+                    {...register("photo", { required: false })}
                     className="file-input hidden file-input-bordered w-full"
                     type="file"
                     onChange={handleChange}
@@ -201,7 +213,7 @@ function Editor() {
               </div>
             </div>
             <CKEditor
-              className="h-96"
+              className="h-96 bg-transparent"
               editor={ClassicEditor}
               data=""
               onReady={(editor) => {
@@ -223,6 +235,7 @@ function Editor() {
             <div className="my-2">
               <p>Tags</p>
               <CreatableSelect
+              className="bg-transparent"
                 components={animatedComponents}
                 isClearable
                 isMulti

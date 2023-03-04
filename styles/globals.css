@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 
+@import url('https://cdn.staticaly.com/gh/sh4hids/bangla-web-fonts/9baee0fc23e77fe957c0b70fe49d81d2cbbe87d6/boshonto/stylesheet.css');
 
 
 body {
-    font-family: 'BenSen', 'Poppins', sans-serif !important;
+    font-family: 'Boshonto', 'Poppins', sans-serif !important;
 }
 
 
@@ -51,9 +52,9 @@ h6 {
 
 }
 
-
+/* */
 .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
-    height: 300px;
+    height: 400px;
 }
 .css-13cymwt-control {
     padding: 6px 3px;
@@ -99,69 +100,40 @@ ol li {
 }
 
 /* Blockquote header */
-blockquote p {
-    font-family: 'Abril Fatface', cursive;
-    position: relative; /* for pseudos */
+blockquote  {
+    border-left: 6px solid #ddd;
+    padding-left: 21px;
+}
+
+:root {
+    --color: #ddd;
+    --background: black!important;
+}
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
     color: #aaa;
-    font-size: 2.8rem;
-    font-weight: normal;
-    line-height: 1;
-    margin: 0;
-    border: 2px solid #fff;
-    border: solid 2px;
-    border-radius:20px;
-    padding: 25px;
+    background: black!important;
 }
 
-/* Blockquote right double quotes */
-blockquote p:after {
-    content: "";
-    position: absolute;
-    border: 2px solid #e74848;
-    border-radius: 153px 123px 102px 231px;
-    width: 200px;
-    height: 28px;
-    bottom: -26px;
-    color: black;
-    left: 48px;
-    z-index: 3;
+.ck-content {
+    background: var(--background)
 }
 
-blockquote p:before {
-    content:"";
-    position: absolute;
-    width: 194px;
-    border: 6px solid #fff;
-    bottom: -3px;
-    left: 50px;
-    z-index: 2;
+. css-13cymwt-control{
+    background: transparent!important;
+    color: #aaa;
+    }
+
+.css-t3ipsp-control{
+    background: transparent!important;
+    color: #aaa;
 }
 
-/* increase header size after 600px */
-@media all and (min-width: 600px) {
-    .blockquote p {
-        font-size: 3rem;
-        line-height: 1.2;
-   }
-
+#react-select-2-listbox{
+    background: black!important;
+    color: #aaa
 }
 
-/* Blockquote subheader */
-blockquote p {
-    position: relative;
-    color: black;
-    border: 2px solid #e74848;
-    font-size: 1.3rem;
-    font-weight: 400;
-    line-height: 1.2;
-    margin: 0;
-    padding-top: 15px;
-    z-index: 1;
-    margin-left:50px;
-    padding-left:12px;
-}
-
- 
-blockquote p:first-letter {
-  margin-left:-12px;
+#react-select-3-listbox{
+    background: #353536!important;
+    color: #aaa
 }

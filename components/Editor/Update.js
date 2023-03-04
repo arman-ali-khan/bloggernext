@@ -30,6 +30,11 @@ function Update({editPost}) {
       title: editPost.title,
     }
   });
+
+  const [title,setTitle]= useState(editPost.title)
+ 
+
+
   const [posting, setPosting] = useState(false);
 
   const [file, setFile] = useState();
@@ -46,11 +51,11 @@ function Update({editPost}) {
   const animatedComponents = makeAnimated();
 
   // Category
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(editPost.categories);
 
 
   // Tags
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(editPost.tags);
 
 
   const [options, setOptions] = useState([]);
@@ -98,7 +103,7 @@ console.log(photo)
         const photoUrl = photoData.url;
         if(photoUrl){
             const postData = {
-                title: data.title,
+                title: title,
                 thumb: photoUrl,
                 categories: categories,
                 tags: tags,
@@ -123,16 +128,7 @@ console.log(photo)
             }
       });
 
-    // fetch('https://blog-server-sparmankhan.vercel.app/blogs',{
-    //   method:'POST',
-    //   headers:{
-    //     'content-type':'application/json'
-    //   },
-    //   body: JSON.stringify(postData)
-    // }).then(res=>res.json())
-    // .then(data=>{
-    //   console.log(data)
-    // })
+    
   };
 
   
@@ -152,6 +148,7 @@ console.log(photo)
                 <input defaultValue={editPost.title}
                   {...register("title", { required: false })}
                   className="input w-full input-bordered"
+                  onChange={e=>setTitle(e.target.value)}
                   type="text"
                 />
               </label>
@@ -197,6 +194,7 @@ console.log(photo)
                { file &&
                   file ? <>
                    <img
+                   defaultValue={editPost.thumb}
                   className="h-44 w-44 rounded-md object-cover"
                   src={file}
                   alt=""
