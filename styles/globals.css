@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('https://cdn.staticaly.com/gh/sh4hids/bangla-web-fonts/9baee0fc23e77fe957c0b70fe49d81d2cbbe87d6/boshonto/stylesheet.css');
+
+
+body {
+    font-family: 'Boshonto', 'Poppins', sans-serif !important;
+}
+
+
+
+
+
+h1 { 
+    font-size: 2.25rem/* 36px */;
+    line-height: 2.5rem/* 40px */;
+    font-weight: 700;
+
+}
+
+
+
+h2 { 
+    font-size: 1.875rem/* 30px */;
+    line-height: 2.25rem/* 36px */;
+    font-weight: 700;
+}
+h3 { 
+    font-size: 1.5rem/* 24px */;
+    line-height: 2rem/* 32px */;
+    font-weight: 700;
+
+}
+h4 { 
+    font-size: 1.25rem/* 20px */;
+    line-height: 1.75rem/* 28px */;
+    font-weight: 600;
+
+}
+h5 { 
+    font-size: 0.975rem/* 14px */;
+    line-height: 1.25rem/* 20px */;
+    font-weight: 600;
+}
+h6 { 
+    font-size: 0.875rem/* 14px */;
+    line-height: 1.25rem/* 20px */;
+    font-weight: 600;
+
+}
+
+/* */
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    height: 400px;
+}
+.css-13cymwt-control {
+    padding: 6px 3px;
+}
+
+.css-t3ipsp-control {
+    padding: 6px 3px;
+}
+    .postbody a{
+    color: blue;
+    
+    }
+    .postbody a:hover{
+    color: blue;
+    text-decoration: underline
+    }
+
+
+   table{
+   border: 1px solid #aaa;
+   padding: 0 5px
+   }
+
+   table tr {
+    border : 1px solid #aaa;
+    padding: 0 5px
+   }
+
+   table tr td {
+    border : 1px solid #aaa;
+    padding: 0 5px
+   }
+
+
+   ul li {
+    list-style: inside;
+}
+
+
+ol li {
+    list-style: decimal;
+    margin: 0 0 0 16px;
+}
+
+/* Blockquote header */
+blockquote  {
+    border-left: 6px solid #ddd;
+    padding-left: 21px;
+}
+
+:root {
+    --color: #ddd;
+    --background: black!important;
+}
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    color: #aaa;
+    background: black!important;
+}
+
+.ck-content {
+    background: var(--background)
+}
+
+. css-13cymwt-control{
+    background: transparent!important;
+    color: #aaa;
+    }
+
+.css-t3ipsp-control{
+    background: transparent!important;
+    color: #aaa;
+}
+
+#react-select-2-listbox{
+    background: black!important;
+    color: #aaa
+}
+
+#react-select-3-listbox{
+    background: #353536!important;
+    color: #aaa
+}
