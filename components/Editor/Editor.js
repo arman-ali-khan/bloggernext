@@ -4,13 +4,14 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Layout from "../../Layout/Layout";
 import { useContext } from "react";
 import CreatableSelect from "react-select/creatable";
-
+import Lottie from "lottie-react";
 import { contextProvider } from "../../context/AuthContext";
 // React select
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import loading from '../../assest/loading.json'
 
 
 function Editor() {
@@ -71,7 +72,7 @@ function Editor() {
       });
   }, []);
   const { user,dbUser } = useContext(contextProvider);
-  console.log(postId);
+  
 
   useEffect(() => {
     setLoaded(true);
@@ -102,7 +103,8 @@ function Editor() {
           tags: tags,
           body: postBody.data,
           id: postId.toString(),
-          view: "0",
+          view: 0,
+          publish: true,
           name: user.displayName,
           email: user.email,
           photo: user.photoURL,
@@ -255,7 +257,7 @@ function Editor() {
       </>
     );
   } else {
-    return <h2> Editor is loading </h2>;
+    return <h2>  <Lottie animationData={loading} loop={true} /> </h2>;
   }
 }
 

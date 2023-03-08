@@ -9,6 +9,7 @@ import Sidebar from "../Modal/Sidebar";
 import { contextProvider } from "../../context/AuthContext";
 import Logout from "../Modal/Logout";
 import axios from "axios";
+import Notify from "../Modal/Notify";
 
 const BottomBar = () => {
   const {googleLogin,user,logOut,dbUser} = useContext(contextProvider)
@@ -16,7 +17,7 @@ const BottomBar = () => {
   
 
   return (
-    <div className="w-full fixed !z-50 object-center items-center justify-center bottom-12 ">
+    <div className="w-full fixed !z-50 object-center items-center justify-center bottom-5 sm:bottom-12 ">
         
       <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-white md:bg-opacity-70 bg-gray-600  opacity-90 md:bg-gray-600  rounded-full">
        
@@ -48,7 +49,7 @@ const BottomBar = () => {
           </li>
           {/* Notifications */}
           <li className="list-none">
-            <Link className="px-6 sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Notification" href={'/'}><RiNotification2Line /></Link>
+            <label htmlFor="notify" className="px-6 sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Notification" href={'/'}><RiNotification2Line /></label>
           </li>
           <li className="list-none">
            
@@ -82,6 +83,7 @@ const BottomBar = () => {
       </div>
       <Sidebar />
       <Logout />
+      <Notify />
     </div>
   );
 };

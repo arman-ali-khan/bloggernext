@@ -70,7 +70,7 @@ const Register = () => {
 
                 };
 
-                fetch(`https://blog-server-sparmankhan.vercel.app/blogs/user`, {
+                fetch(`https://blog-server-sparmankhan.vercel.app/user`, {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

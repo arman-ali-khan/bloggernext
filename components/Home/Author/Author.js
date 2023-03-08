@@ -1,8 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { TbUsers } from 'react-icons/tb';
+import { contextProvider } from '../../../context/AuthContext';
 import AuthorPost from './AuthorPost';
 
 const Author = ({data}) => {
+    const {user} = useContext(contextProvider)
     const [author,setAuthor] = useState({})
     useEffect(()=>{
         axios.get(`https://blog-server-sparmankhan.vercel.app/author?name=${data.username}`)
@@ -29,31 +32,37 @@ const Author = ({data}) => {
                     </div>
                 </div>
             </div>
-            <div className="flex">
+            {
+                user?.email &&  <div className="flex">
                 <button className="flex-1 rounded-full bg-blue  antialiased font-bold hover:bg-blue-dark px-4 py-2 mr-2 border-2">Follow</button>
                 <button className="flex-1 rounded-full border-2 border-grey font-semibold  px-4 py-2">Message</button>
             </div>
+            }
+           
         </div>
         <div className="px-4 py-4 w-full flex justify-center">
-           <div>
-           <div className="flex items-center text-grey-darker mb-4">
-                <svg className="h-6 w-6 text-grey mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24" width="24" height="24">
-                    <path className="heroicon-ui"
-                        d="M12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm9 11a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v2a1 1 0 0 1-2 0v-2a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v2z" />
-                </svg>
-                <span><strong className="text-black">12</strong> Followers you know</span>
+           <div className='flex justify-between gap-2 w-full'>
+           
+            <div className='flex items-center flex-col text-grey-darker mb-4'>
+            <div className='flex items-center gap-1'>
+            
+                <strong className="text-blue-400 text-xl">12</strong> 
             </div>
-            <div className="flex">
-                <div className="flex flex-row-reverse justify-end mr-2">
-                    <img className="border-2 border-white rounded-full h-10 w-10" src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/>
-                    <img className="border-2 border-white rounded-full h-10 w-10 -mr-2" src="https://randomuser.me/api/portraits/women/31.jpg" alt=""/>
-                    <img className="border-2 border-white rounded-full h-10 w-10 -mr-2" src="https://randomuser.me/api/portraits/men/33.jpg" alt=""/>
-                    <img className="border-2 border-white rounded-full h-10 w-10 -mr-2" src="https://randomuser.me/api/portraits/women/32.jpg" alt=""/>
-                    <img className="border-2 border-white rounded-full h-10 w-10 -mr-2" src="https://randomuser.me/api/portraits/men/44.jpg" alt=""/>
-                    <img className="border-2 border-white rounded-full h-10 w-10 -mr-2" src="https://randomuser.me/api/portraits/women/42.jpg" alt=""/>
-                </div>
-                <span className="flex items-center justify-center text-sm text-grey-darker font-semibold border-2 border-grey-light rounded-full h-10 w-10">+3</span>
+                <span>Followers </span>
+            </div>
+            <div className='flex items-center flex-col text-grey-darker mb-4'>
+            <div className='flex items-center gap-1'>
+           
+                <strong className="text-blue-400 text-xl">12</strong> 
+            </div>
+                <span>Following </span>
+            </div>
+            <div className='flex items-center flex-col text-grey-darker mb-4'>
+            <div className='flex items-center gap-1'>
+           
+                <strong className="text-blue-400 text-xl">12</strong> 
+            </div>
+                <span>Posts </span>
             </div>
            </div>
         </div>

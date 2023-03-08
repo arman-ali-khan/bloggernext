@@ -33,7 +33,7 @@ const Pinned = () => {
       <div>
         
     { featured.length &&
-      featured.slice(2,3).map(post=> <SinglePinnded key={post.blog[0].id} post={post} />)
+      featured.slice(2,3).map(post=> <SinglePinnded key={post.blog[0]?.id} post={post} />)
     }
        
       </div>

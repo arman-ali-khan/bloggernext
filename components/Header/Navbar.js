@@ -112,7 +112,7 @@ h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamod
   </div>
   <div className="navbar-end">
    {
-    dbUser?.role==='user' ? <Link className="text-3xl hover:tooltip hover:tooltip-open hover:tooltip-bottom" data-tip="Add New Post" href={'/@add-post'}>
+    dbUser?.role==='user' ? <Link className="text-3xl hover:tooltip hover:tooltip-open hover:tooltip-bottom" data-tip="Add Post" href={'/@add-post'}>
       <RiAddCircleLine className='hover:rotate-90 transition-all duration-300 hover:transition-all hover:duration-300' />
       {/* <p className='border rounded-full h-7 w-7 flex justify-center items-center hover:rotate-45'>+</p> */}
     </Link>

@@ -17,7 +17,7 @@ const SinglePinnded = ({post}) => {
             <p className='absolute top-0 right-0 dark:bg-gray-600 bg-blue-200 font-semibold text-blue-600 px-3 rounded-xl rounded-br-none rounded-tl-none'> Pinned</p>
      <div>
      <div className='md:w-64 sm:w-44 h-32'>
-        <img className='rounded-xl w-full h-full object-cover hover:scale-105 duration-300   hover:duration-300' src={post.blog[0].thumb} alt="" />
+        <img className='rounded-xl w-full h-full object-cover hover:scale-105 duration-300   hover:duration-300' src={post.blog[0]?.thumb} alt="" />
       </div>
      </div>
      <div className='flex'>

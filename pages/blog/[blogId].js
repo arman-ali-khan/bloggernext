@@ -10,34 +10,78 @@ import { contextProvider } from '../../context/AuthContext';
 import { toast } from 'react-hot-toast';
 import DeletePost from '../../components/Modal/DeletePost';
 import { BiCommentDots, BiHeart } from 'react-icons/bi';
-import { RiHeart3Fill } from 'react-icons/ri';
+import { RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
 import Comment from '../../components/Modal/Comment';
 import axios from 'axios';
 import {HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight} from 'react-icons/hi2'
 
 
 const blog = ({data}) => {
-  const {user,commented} = useContext(contextProvider)
- 
-  const view = parseInt(data?.view) +1
-  const postView = {
-   view: view.toString()
-  }
+  // like update
+  const [likeUpdate,setLikeUpdate] = useState(false)
+  const {user,commented,dbUser} = useContext(contextProvider)
 
-   
- useEffect(()=>{
-  fetch(`https://blog-server-sparmankhan.vercel.app/view/${data._id}`,{
-    method: 'PUT',
-    headers: {
+//   likes
+const [likes,setLikes] = useState([])
+
+useEffect(()=>{
+  axios.get(`https://blog-server-sparmankhan.vercel.app/likes/${data._id}`)
+  .then(res=>setLikes(res.data))
+},[likeUpdate])
+
+// Get like 
+
+const [userLike,setUserLike] = useState({})
+useEffect(()=>{
+  axios.get(`https://blog-server-sparmankhan.vercel.app/like/${data._id}?email=${user?.email}`)
+  .then(res=>{
+    setUserLike(res.data)
+  })
+},[data,user?.email,likeUpdate])
+
+
+
+
+const handleLike = e =>{
+  const likeData = {
+    name: dbUser.name,
+    email: dbUser.email,
+    postEmail: data.email,
+    postId: data.id,
+    id: e,
+    title: data.title
+  }
+  fetch(`https://blog-server-sparmankhan.vercel.app/like`,{
+    method:'post',
+    headers:{
       'content-type':'application/json'
     },
-    body: JSON.stringify(postView)
+    body: JSON.stringify(likeData)
   })
   .then(res=>res.json())
   .then(data=>{
- 
+    setLikeUpdate(!likeUpdate)
+    toast.success('Liked',{
+      icon: '❤️',
+    })
   })
- },[data._id])
+}
+
+
+// unlike
+
+const handleUnLike= id =>{
+  fetch(`https://blog-server-sparmankhan.vercel.app/like/${id}?email=${user?.email}`,{
+    method:'DELETE',
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    toast.error('Unliked',{
+  icon: '💔',
+})
+setLikeUpdate(!likeUpdate)
+  })
+}
   
  const post = data.body
  const socialBody = post.replace(/<\/?[^>]+>/gi, '')
@@ -62,7 +106,7 @@ const blog = ({data}) => {
     return (
         <Layout title={`${data.title} || Next Blogger`} description={socialBody} body={data.body} thumb={data.thumb}>
            <div className='md:flex w-full '>
-            <div className='md:w-full m-4'>
+            <div className='md:w-full m-2'>
             <div className="mx-auto md:p-2 dark:bg-gray-800 ">
 	<div className="flex flex-col mx-auto overflow-hidden rounded">
 		<img src={data.thumb} alt="" className="w-full h-60 sm:h-96 object-cover object-center dark:bg-gray-500" />
@@ -90,39 +134,42 @@ const blog = ({data}) => {
 		</div>
 	</div>
 </div>
- <div className={`flex gap-2 md:hidden py-4 fixed duration-300 transition-all top-1/2 ${commentShow?'':'ml-12'}  items-center`}>
- <div className={`flex flex-col gap-2 py-4 fixed  top-1/2 mx-3  items-center  bg-base-100 px-2 rounded-lg duration-300 transition-all ${commentShow ? '-left-20':'left-0'}`}>
-  {/* Like */}
-  <div className="flex flex-col items-center gap-2  hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
-    <RiHeart3Fill className="text-rose-600 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-200 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1 " />
-    <p className='text-white'>{data.like}</p>
-  </div>
-  <label htmlFor="postComment" onClick={()=>setDeleteId(data)} className="flex flex-col items-center hover:bg-base-100 rounded-lg  gap-2 hover:tooltip hover:flex hover:tooltip-open hover:tooltip-right" data-tip="Comments">
-   {/* Comments */}
-    <div  className=" ">
-       <BiCommentDots  className="text-4xl transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1" /> 
-    </div>
-    <p className='text-white'>{comments?.length}</p>
-  </label>
- 
-  </div> 
 
-  <div onClick={()=>setCommentShow(!commentShow)} className='bg-gray-600 text-white py-6 rounded-full' >
-    {
-      commentShow ? <HiOutlineChevronDoubleRight /> : <HiOutlineChevronDoubleLeft />
-    }
-
-</div>
- </div>
 
 
 {/* Desktop Comment */}
  <div className={`md:flex flex-col border shadow-lg gap-2 left-0 hidden py-4 fixed  top-1/2 mx-3  items-center  bg-base-100 px-2 rounded-lg duration-300 transition-all `}>
   {/* Like */}
-  <div className="flex flex-col items-center gap-2  hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
-    <RiHeart3Fill className="text-rose-600 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-200 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1 " />
-    <p >{data.like}</p>
+
+  {
+    user?.email ? <div className="flex flex-col items-center gap-2">
+  {/* onClick={()=>handleUnLike(data._id)}  */}
+    {
+      userLike.email ? 
+      <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Unlike">
+         <RiHeart3Fill onClick={()=>handleUnLike(data._id)} className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
+      </div>
+     
+      :
+      <div className="hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
+        <RiHeart3Line onClick={()=>handleLike(data._id)} className="text-rose-600 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-200 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1 " />
+      </div>
+    }
+   
+    <p >{likes.length}</p>
   </div>
+    :
+    <div className="flex flex-col items-center gap-2">
+    
+     
+        <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Login to like">
+           <RiHeart3Fill  className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
+        </div>
+     
+      <p >{likes.length}</p>
+    </div>
+  }
+  
   <label htmlFor="postComment" onClick={()=>setDeleteId(data)} className="flex flex-col items-center hover:bg-base-300  rounded-lg  gap-2 hover:tooltip hover:flex hover:tooltip-open hover:tooltip-right" data-tip="Comments">
    {/* Comments */}
     <div  className=" ">
@@ -138,9 +185,61 @@ const blog = ({data}) => {
             <div className='md:w-4/12 m-4 '>
               <Author data={data} />
             </div>
+
+
+
             <DeletePost deleteId={deleteId} />
             <Comment post={deleteId} />
         </div>
+
+        <div className={`flex gap-2 md:hidden py-4 fixed duration-300 transition-all top-1/2 ${commentShow?'':'ml-12'}  items-center`}>
+ <div className={`flex flex-col gap-2 py-4 fixed  top-1/2 mx-3  items-center  bg-base-100 px-2 rounded-lg duration-300 transition-all ${commentShow ? '-left-20':'left-0'}`}>
+  {/* Like */}
+  {
+    user?.email ? <div className="flex flex-col items-center gap-2">
+  {/* onClick={()=>handleUnLike(data._id)}  */}
+    {
+      userLike.email ? 
+      <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Unlike">
+         <RiHeart3Fill onClick={()=>handleUnLike(data._id)} className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
+      </div>
+     
+      :
+      <div className="hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
+        <RiHeart3Line onClick={()=>handleLike(data._id)} className="text-rose-600 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-200 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1 " />
+      </div>
+    }
+   
+    <p >{likes.length}</p>
+  </div>
+    :
+    <div className="flex flex-col items-center gap-2">
+    
+     
+        <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Login to like">
+           <RiHeart3Fill  className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
+        </div>
+     
+      <p >{likes.length}</p>
+    </div>
+  }
+  <label htmlFor="postComment" onClick={()=>setDeleteId(data)} className="flex flex-col items-center hover:bg-base-100 rounded-lg  gap-2 hover:tooltip hover:flex hover:tooltip-open hover:tooltip-right" data-tip="Comments">
+   {/* Comments */}
+    <div  className=" ">
+       <BiCommentDots  className="text-4xl transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1" /> 
+    </div>
+    <p className='text-white'>{comments?.length}</p>
+  </label>
+ 
+  </div> 
+{/* Show hide btn */}
+  <div onClick={()=>setCommentShow(!commentShow)} className={`bg-gray-600 text-white py-6 rounded-r-full  ${commentShow?'':'ml-4'}`}>
+    {
+      commentShow ? <HiOutlineChevronDoubleRight /> : <HiOutlineChevronDoubleLeft />
+    }
+
+</div>
+ </div>
         </Layout>
     );
 };
