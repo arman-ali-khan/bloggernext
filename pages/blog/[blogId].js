@@ -31,7 +31,7 @@ const blog = ({data}) => {
   const id = router.query.blogId
   const [postView,setPostView] =  useState({})
    // Post view update
-  const [view,setView] = useState(postView.view + 1 )
+  const [view,setView] = useState(postView.view)
 
 
   useEffect(()=>{
@@ -46,6 +46,7 @@ const blog = ({data}) => {
   // }
 
 useEffect(()=>{
+  setView(postView.view + 1)
   fetch(`http://localhost:5000/post/${id}`,{
     method:'PATCH',
     headers:{
