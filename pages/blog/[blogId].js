@@ -58,7 +58,7 @@ useEffect(()=>{
   .then(data=>{
     console.log(data);
   })
-},[postView])
+},[id])
 
 // like update
 useEffect(()=>{
