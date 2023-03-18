@@ -46,7 +46,6 @@ const blog = ({data}) => {
   // }
 
 useEffect(()=>{
-  setView(postView.view+1)
   fetch(`http://localhost:5000/post/${id}`,{
     method:'PATCH',
     headers:{
