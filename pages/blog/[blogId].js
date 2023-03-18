@@ -37,7 +37,7 @@ const blog = ({data}) => {
   },[id])
 
   // Post view update
-  const view = view.view + 1
+  const view = postView.view + 1
 
 useEffect(()=>{
   fetch(`http://localhost:5000/post/${id}`,{
