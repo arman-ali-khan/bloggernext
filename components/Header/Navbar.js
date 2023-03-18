@@ -32,7 +32,7 @@ useEffect( () => {
 })
 
     return (
-        <div className={`active ${visible ? 'top-0' : 'absolute md:sticky -top-96 md:top-0 duration-500'} navbar !min-h-8 sm:!min-h-16 sticky top-0 z-50 !p-0`} >
+        <div className={`active ${visible ? 'top-0' : 'absolute -translate-y-16 md:sticky -top-96 md:top-0 duration-500'} navbar !min-h-8 sm:!min-h-16 sticky top-0 z-50 !p-0`} >
   <div className='navbar !min-h-8 sm:!min-h-16 bg-base-100 !p-4 !py-0 mx-3 sm:mx-auto border-t-0 border mt-0 md:w-9/12 rounded-b-3xl'>
   <div className="navbar-start">
     <div className="dropdown">

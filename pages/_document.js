@@ -3,7 +3,7 @@ import Script from 'next/script'
 
 export default function Document() {
   return (
-    <Html data-theme="dark" lang="en">
+    <Html data-theme="dark" scroll-behavior='smooth' lang="en">
       <Head >
         
       <link href="https://fonts.maateen.me/bensen/font.css" rel="stylesheet" />

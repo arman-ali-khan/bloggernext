@@ -14,7 +14,7 @@ import Notify from "../Modal/Notify";
 const BottomBar = () => {
   const {googleLogin,user,logOut,dbUser,category,setCategory} = useContext(contextProvider)
 
-  
+  // Bottom bar
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 const [visible, setVisible] = useState(true)
@@ -36,9 +36,33 @@ useEffect( () => {
 
     return () => window.removeEventListener('scroll', handleScroll)
 })
+
+// back to top
+
+
+const [topprevScrollPos, setTopPrevScrollPos] = useState(0);
+const [topvisible, setTopVisible] = useState(false)
+
+const topHandleScroll = () => {
+    const currentScrollPos = window.scrollY
+
+    if(currentScrollPos > topprevScrollPos){
+        setTopVisible(false)
+    }else{
+        setTopVisible(true)
+    }
+
+    setTopPrevScrollPos(currentScrollPos)
+}
+
+useEffect( () => {
+    window.addEventListener('scroll', topHandleScroll);
+
+    return () => window.removeEventListener('scroll', topHandleScroll)
+})
   return (
     <div className={`${visible ? ' fixed bottom-5 sm:bottom-12  duration-500 transition-all' : 'absolute md:fixed -top-44 md:bottom-12 translate-y-10 md:translate-y-0 duration-500 transition-all'} w-full duration-500 transition-all !z-50 object-center items-center justify-center md:fixed md:bottom-12 sm:bottom-12 `} >
-        
+      
       <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-white md:bg-opacity-70 bg-gray-600  opacity-90 md:bg-gray-600  rounded-full">
        
         <ul className="flex relative justify-center ">
@@ -104,6 +128,8 @@ useEffect( () => {
       <Sidebar />
       <Logout />
       <Notify />
+      {/* Back to top */}
+      <a href="#top" className={` ${topvisible ? '   -translate-y-10':'translate-y-0'} fixed -translate-y-14 right-6 bg-base-100 rounded-full px-2`}>Top</a>
     </div>
   );
 };
