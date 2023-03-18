@@ -10,9 +10,29 @@ import { RiAddCircleFill, RiAddCircleLine } from 'react-icons/ri';
 const Navbar = () => {
   const {googleLogin,user,logOut,dbUser} = useContext(contextProvider)
 
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+const [visible, setVisible] = useState(true)
+
+const handleScroll = () => {
+    const currentScrollPos = window.scrollY
+
+    if(currentScrollPos > prevScrollPos){
+        setVisible(false)
+    }else{
+        setVisible(true)
+    }
+
+    setPrevScrollPos(currentScrollPos)
+}
+
+useEffect( () => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll)
+})
 
     return (
-        <div className="navbar !min-h-8 sm:!min-h-16 sticky top-0 z-50 !p-0">
+        <div className={`active ${visible ? 'top-0' : 'absolute md:sticky -top-96 md:top-0 duration-500'} navbar !min-h-8 sm:!min-h-16 sticky top-0 z-50 !p-0`} >
   <div className='navbar !min-h-8 sm:!min-h-16 bg-base-100 !p-4 !py-0 mx-3 sm:mx-auto border-t-0 border mt-0 md:w-9/12 rounded-b-3xl'>
   <div className="navbar-start">
     <div className="dropdown">
@@ -124,7 +144,7 @@ h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamod
    
   </div>
   </div>
-  <BottomBar/>
+  <BottomBar  />
 </div>
     );
 };

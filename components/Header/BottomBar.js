@@ -16,8 +16,28 @@ const BottomBar = () => {
 
   
 
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+const [visible, setVisible] = useState(true)
+
+const handleScroll = () => {
+    const currentScrollPos = window.scrollY
+
+    if(currentScrollPos > prevScrollPos){
+        setVisible(false)
+    }else{
+        setVisible(true)
+    }
+
+    setPrevScrollPos(currentScrollPos)
+}
+
+useEffect( () => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll)
+})
   return (
-    <div className="w-full fixed !z-50 object-center items-center justify-center bottom-5 sm:bottom-12 ">
+    <div className={`${visible ? ' fixed bottom-5 sm:bottom-12  duration-500 transition-all' : 'absolute md:fixed -top-44 md:bottom-12 translate-y-10 md:translate-y-0 duration-500 transition-all'} w-full duration-500 transition-all !z-50 object-center items-center justify-center md:fixed md:bottom-12 sm:bottom-12 `} >
         
       <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-white md:bg-opacity-70 bg-gray-600  opacity-90 md:bg-gray-600  rounded-full">
        
