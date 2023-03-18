@@ -30,22 +30,22 @@ const blog = ({data}) => {
   const id = router.query.blogId
  
 
-  const [view,setPostView] =  useState({})
+  const [postView,setPostView] =  useState({})
   useEffect(()=>{
     axios.get(`http://localhost:5000/post/${id}`)
     .then(res=>setPostView(res.data))
   },[id])
 
   // Post view update
-  const postView = view.view + 1
-  console.log(postView);
+  const view = view.view + 1
+
 useEffect(()=>{
   fetch(`http://localhost:5000/post/${id}`,{
     method:'PATCH',
     headers:{
       'content-type':'application/json'
     },
-    body: JSON.stringify({postView})
+    body: JSON.stringify({view})
   })
   .then(res=>res.json())
   .then(data=>{
