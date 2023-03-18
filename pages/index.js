@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import Layout from '../Layout/Layout'
 import Hero from '../components/Home/Hero/Hero'
 import HomePage from '../components/Home/HomePage'
+import Categories from '../components/Categories/Categories'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,6 +13,7 @@ export default function Home({data}) {
   return (
      <Layout title={'Home || Next Blog'}>
 {/* <Hero /> */}
+<Categories />
 <HomePage data={data} />
      </Layout>
   )

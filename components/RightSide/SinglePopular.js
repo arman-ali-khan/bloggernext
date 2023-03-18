@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { MdOutlineModeComment } from 'react-icons/md';
@@ -31,7 +32,7 @@ const SinglePopular = ({post}) => {
            </div>
            <Link href={`/blog/${post.id}`} className='text-base   font-bold'>{post.title.split(' ').slice(0,13).join(' ')}{post.title.split(' ').length>13 && '...'}</Link>
            <div className='flex justify-between text-xs'>
-   <p>Published 12 June 2023   </p> 
+   <p>{moment(post?.date).fromNow()}  </p> 
    <p className="flex items-center gap-1 font-semibold"><svg className="w-5 h-5 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg> {post?.view}</p>
    </div>
            </div>

@@ -12,7 +12,7 @@ import axios from "axios";
 import Notify from "../Modal/Notify";
 
 const BottomBar = () => {
-  const {googleLogin,user,logOut,dbUser} = useContext(contextProvider)
+  const {googleLogin,user,logOut,dbUser,category,setCategory} = useContext(contextProvider)
 
   
 
@@ -25,7 +25,7 @@ const BottomBar = () => {
           <li className="list-none">
          
     {/* <!-- Page content here --> */}
-   <label  htmlFor="my-drawer" className="px-6  drawer-button sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Categories" href={'/'}><RxDashboard /></label>
+   <label onClick={()=>setCategory(!category)} htmlFor="my-drawer" className="px-6  drawer-button sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Categories" href={'/'}><RxDashboard /></label>
            
             {/* < className="btn btn-primary drawer-button">Open drawer</> */}
           </li>

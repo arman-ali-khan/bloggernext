@@ -1,4 +1,5 @@
 import React from 'react';
+import Sidebar from '../Modal/Sidebar';
 import Pinned from '../Pinned/Pinned';
 import Popular from '../RightSide/Popular';
 import Recent from './Recent/Recent.js';
@@ -10,9 +11,11 @@ const HomePage = ({data}) => {
                 <Pinned />
                 <Recent data={data} />
             </div>
+            
             <div className='md:w-3/12 m-4 '>
               <Popular />
             </div>
+           
         </div>
     );
 };

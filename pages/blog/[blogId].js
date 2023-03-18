@@ -14,16 +14,35 @@ import { RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
 import Comment from '../../components/Modal/Comment';
 import axios from 'axios';
 import {HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight} from 'react-icons/hi2'
+import Categories from '../../components/Categories/Categories';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const blog = ({data}) => {
+console.log(data);
   // like update
   const [likeUpdate,setLikeUpdate] = useState(false)
   const {user,commented,dbUser} = useContext(contextProvider)
+  //   likes
+  const [likes,setLikes] = useState([])
+  
+  // Post view update
+  const postView = data.view + 1
+useEffect(()=>{
+  fetch(`http://localhost:5000/post/${data.id}`,{
+    method:'PATCH',
+    headers:{
+      'content-type':'application/json'
+    },
+    body: JSON.stringify({postView})
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data);
+  })
+},[uuidv4()])
 
-//   likes
-const [likes,setLikes] = useState([])
-
+// like update
 useEffect(()=>{
   axios.get(`https://blog-server-sparmankhan.vercel.app/likes/${data._id}`)
   .then(res=>setLikes(res.data))
@@ -105,6 +124,7 @@ setLikeUpdate(!likeUpdate)
 
     return (
         <Layout title={`${data.title} || Next Blogger`} description={socialBody} body={data.body} thumb={data.thumb}>
+           <Categories />
            <div className='md:flex w-full '>
             <div className='md:w-full m-2'>
             <div className="mx-auto md:p-2 dark:bg-gray-800 ">
@@ -239,7 +259,9 @@ setLikeUpdate(!likeUpdate)
     }
 
 </div>
+
  </div>
+
         </Layout>
     );
 };

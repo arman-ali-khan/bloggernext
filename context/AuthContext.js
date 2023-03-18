@@ -19,6 +19,8 @@ const AuthContext = ({ children }) => {
   const [commented,setCommented] = useState(false)
   const [user, setUser] = useState({});
   const [dbUser, setDbUser] = useState({});
+  // bottombar category show and hide
+  const [category,setCategory]=useState(false)
 
     // DB USer
 
@@ -86,6 +88,8 @@ const AuthContext = ({ children }) => {
     logOut,
     commented,
     setCommented,
+    category,
+    setCategory
   };
   return (
     <contextProvider.Provider value={info}>{children}</contextProvider.Provider>

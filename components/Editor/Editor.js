@@ -109,7 +109,7 @@ function Editor() {
           email: user.email,
           photo: user.photoURL,
           username: dbUser.username,
-          like: '0'
+          date: new Date()
         };
         fetch("https://blog-server-sparmankhan.vercel.app/blogs", {
           method: "POST",

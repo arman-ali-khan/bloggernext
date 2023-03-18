@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { MdOutlineModeComment } from 'react-icons/md';
@@ -29,7 +30,7 @@ const SinglePinnded = ({post}) => {
         <Link href={`/blog/${post.blog[0].id}`} className='text-xl font-bold  '> {post.blog[0].title}</Link>
 
 <div className='inline-flex bottom justify-between w-full'>
-<p>Published 12 June 2023   </p> 
+<p>Published {moment(post?.date).fromNow()} </p> 
 <p className="flex items-center gap-1 font-semibold"><svg className="w-5 h-5 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg> {post?.blog[0].view}</p>
 </div>
       </div>
