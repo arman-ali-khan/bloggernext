@@ -21,6 +21,8 @@ import { FiEye } from 'react-icons/fi';
 
 const blog = ({data}) => {
 
+  const uuid = uuidv4();
+
   // like update
   const [likeUpdate,setLikeUpdate] = useState(false)
   const {user,commented,dbUser} = useContext(contextProvider)
@@ -31,34 +33,16 @@ const blog = ({data}) => {
   const id = router.query.blogId
   const [postView,setPostView] =  useState({})
    // Post view update
-  const [view,setView] = useState(postView.view+1)
+  // const [view,setView] = useState(postView.view+1)
 
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/post/${id}`)
     .then(res=>setPostView(res.data))
-  },[id])
+  },[])
+console.log(postView);
 
 
-  // if(postView.view){
-  //    setView()
-  //    return;
-  // }
-
-useEffect(()=>{
-  setView(postView.view + 1)
-  fetch(`http://localhost:5000/post/${id}`,{
-    method:'PATCH',
-    headers:{
-      'content-type':'application/json'
-    },
-    body: JSON.stringify({view})
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    console.log(data);
-  })
-},[postView])
 
 // like update
 useEffect(()=>{
