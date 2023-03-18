@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { contextProvider } from "../../context/AuthContext";
 import Layout from "../../Layout/Layout";
+import Lottie from "lottie-react";
+import registerLottie from '../../assest/lottie/login.json'
 
 const Register = () => {
   const { createUser, handleUserUpdate } = useContext(contextProvider);
@@ -95,17 +97,15 @@ const Register = () => {
   return (
     <Layout>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="hero min-h-screen bg-base-200">
-          <div className="hero-content flex-col lg:flex-row-reverse">
-            <div className="text-center lg:text-left">
-              <h1 className="text-5xl font-bold">Login now!</h1>
-              <p className="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                assumenda excepturi exercitationem quasi. In deleniti eaque aut
-                repudiandae et a id nisi.
-              </p>
+        <div className="hero min-h-screen bg-base-200 block md:grid">
+          <div className="hero-content flex flex-col md:flex-row ">
+            <div className="text-center">
+              <h1 className="text-5xl font-bold">Register</h1>
+              <div className="py-6 w-full">
+              <Lottie className="hidden md:block" animationData={registerLottie} loop={true} />
+              </div>
             </div>
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card flex-shrink-0  shadow-2xl bg-base-100">
               <div className="card-body">
                 <div className="form-control">
                   <label className="label">
