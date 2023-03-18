@@ -31,13 +31,13 @@ const blog = ({data}) => {
   const id = router.query.blogId
   const [postView,setPostView] =  useState({})
    // Post view update
-  const [view,setView] = useState(postView.view)
+  const [view,setView] = useState(postView.view+1)
 
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/post/${id}`)
     .then(res=>setPostView(res.data))
-  },[view])
+  },[id])
 
 
   // if(postView.view){
@@ -58,7 +58,7 @@ useEffect(()=>{
   .then(data=>{
     console.log(data);
   })
-},[id,postView])
+},[postView])
 
 // like update
 useEffect(()=>{
