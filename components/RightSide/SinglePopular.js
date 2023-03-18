@@ -25,7 +25,7 @@ const SinglePopular = ({post}) => {
            <div className='w-32 h-24  sm:w-full'>
              <img src={post.thumb} className='w-32 sm:w-full hover:scale-105 duration-300  hover:duration-300 object-cover rounded-md h-24' alt="" />
            </div>
-           <div className='w-full'>
+           <div className='w-full pl-2'>
            <div className='text-xs flex justify-between'>
            <p><span>in</span> {post.categories[0]?.label}</p>
            <p className='flex items-center gap-1 font-semibold'><MdOutlineModeComment className='text-lg' /> {comments.length}</p>

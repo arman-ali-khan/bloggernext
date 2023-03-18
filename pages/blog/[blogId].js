@@ -31,15 +31,13 @@ const blog = ({data}) => {
   const id = router.query.blogId
   const [postView,setPostView] =  useState({})
    // Post view update
-  const [view,setView] = useState(postView.view + 1 || 1)
+  const [view,setView] = useState(postView.view + 1 )
 
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/post/${id}`)
-    .then(res=>{
-   
-      setPostView(res.data)})
-  },[id,data])
+    .then(res=>setPostView(res.data))
+  },[id,data,view])
 
 
   // if(postView.view){
@@ -60,7 +58,7 @@ useEffect(()=>{
   .then(data=>{
     console.log(data);
   })
-},[view,postView])
+},[view,postView,id])
 
 // like update
 useEffect(()=>{
@@ -140,7 +138,6 @@ setLikeUpdate(!likeUpdate)
    
  },[data._id,commented])
 
-console.log(data);
     return (
         <Layout title={`${data.title} || Next Blogger`} description={socialBody} body={data.body} thumb={data.thumb}>
            <Categories />
