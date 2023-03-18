@@ -9,13 +9,14 @@ import Author from '../../components/Home/Author/Author';
 import { contextProvider } from '../../context/AuthContext';
 import { toast } from 'react-hot-toast';
 import DeletePost from '../../components/Modal/DeletePost';
-import { BiCommentDots, BiHeart } from 'react-icons/bi';
+import { BiCommentDots, BiFolder, BiHeart } from 'react-icons/bi';
 import { RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
 import Comment from '../../components/Modal/Comment';
 import axios from 'axios';
 import {HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight} from 'react-icons/hi2'
 import Categories from '../../components/Categories/Categories';
 import { v4 as uuidv4 } from 'uuid';
+import { FiEye } from 'react-icons/fi';
 
 
 const blog = ({data}) => {
@@ -28,18 +29,26 @@ const blog = ({data}) => {
 
   const router = useRouter()
   const id = router.query.blogId
- 
-
   const [postView,setPostView] =  useState({})
+   // Post view update
+  const [view,setView] = useState(postView.view + 1 || 1)
+
+
   useEffect(()=>{
     axios.get(`http://localhost:5000/post/${id}`)
-    .then(res=>setPostView(res.data))
-  },[id])
+    .then(res=>{
+   
+      setPostView(res.data)})
+  },[id,data])
 
-  // Post view update
-  const view = postView.view + 1
+
+  // if(postView.view){
+  //    setView()
+  //    return;
+  // }
 
 useEffect(()=>{
+  setView(postView.view+1)
   fetch(`http://localhost:5000/post/${id}`,{
     method:'PATCH',
     headers:{
@@ -51,7 +60,7 @@ useEffect(()=>{
   .then(data=>{
     console.log(data);
   })
-},[postView])
+},[view,postView])
 
 // like update
 useEffect(()=>{
@@ -131,15 +140,19 @@ setLikeUpdate(!likeUpdate)
    
  },[data._id,commented])
 
-
+console.log(data);
     return (
         <Layout title={`${data.title} || Next Blogger`} description={socialBody} body={data.body} thumb={data.thumb}>
            <Categories />
            <div className='md:flex w-full '>
             <div className='md:w-full m-2'>
             <div className="mx-auto md:p-2 dark:bg-gray-800 ">
-	<div className="flex flex-col mx-auto overflow-hidden rounded">
+	<div className="flex flex-col mx-auto overflow-hidden rounded relative">
 		<img src={data.thumb} alt="" className="w-full h-60 sm:h-96 object-cover object-center dark:bg-gray-500" />
+    <div className='absolute top-4 flex justify-between w-full '>
+      <Link href={`/category/${data.categories[0].value}`} className='flex items-center gap-2 ml-3 bg-base-100 px-2 py-1 rounded-full'><BiFolder />{data.categories[0].label}</Link>
+      <div className='flex items-center mr-3 gap-2 bg-base-100 px-2 py-1 rounded-full'><FiEye />{postView.view}</div>
+    </div>
 		<div className="p-2 pb-12 mx-auto -mt-16 space-y-6 sm:px-3 sm:mx-3 lg:mx-12 rounded-xl border bg-base-100">
 			<div className="space-y-2 ">
 				<h4  className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</h4>
