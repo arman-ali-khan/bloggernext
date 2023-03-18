@@ -37,7 +37,7 @@ const blog = ({data}) => {
   useEffect(()=>{
     axios.get(`http://localhost:5000/post/${id}`)
     .then(res=>setPostView(res.data))
-  },[id,data,view])
+  },[view,postView])
 
 
   // if(postView.view){
