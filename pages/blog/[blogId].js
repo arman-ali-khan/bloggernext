@@ -19,17 +19,28 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 const blog = ({data}) => {
-console.log(data);
+
   // like update
   const [likeUpdate,setLikeUpdate] = useState(false)
   const {user,commented,dbUser} = useContext(contextProvider)
   //   likes
   const [likes,setLikes] = useState([])
-  
+
+  const router = useRouter()
+  const id = router.query.blogId
+ 
+
+  const [view,setPostView] =  useState({})
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/post/${id}`)
+    .then(res=>setPostView(res.data))
+  },[id])
+
   // Post view update
-  const postView = data.view + 1
+  const postView = view.view + 1
+  console.log(postView);
 useEffect(()=>{
-  fetch(`http://localhost:5000/post/${data.id}`,{
+  fetch(`http://localhost:5000/post/${id}`,{
     method:'PATCH',
     headers:{
       'content-type':'application/json'
@@ -40,7 +51,7 @@ useEffect(()=>{
   .then(data=>{
     console.log(data);
   })
-},[uuidv4()])
+},[postView])
 
 // like update
 useEffect(()=>{
@@ -104,8 +115,7 @@ setLikeUpdate(!likeUpdate)
   
  const post = data.body
  const socialBody = post.replace(/<\/?[^>]+>/gi, '')
- const router = useRouter()
- const id = router.query.blogId
+
 
  const [deleteId,setDeleteId] = useState({})
 
