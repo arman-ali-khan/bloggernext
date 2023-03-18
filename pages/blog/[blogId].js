@@ -21,7 +21,6 @@ import { FiEye } from 'react-icons/fi';
 
 const blog = ({data}) => {
 
-  const uuid = uuidv4();
 
   // like update
   const [likeUpdate,setLikeUpdate] = useState(false)
@@ -34,13 +33,60 @@ const blog = ({data}) => {
   const [postView,setPostView] =  useState({})
    // Post view update
   // const [view,setView] = useState(postView.view+1)
+const [viewLoading,setViewLoading] = useState(true)
+
+//   useEffect(()=>{
+//     if(typeof(id) ==='string'){
+//       axios.get(`http://localhost:5000/post/${id}`)
+//     .then(res=>{
+//       setPostView(res.data)
+//       setViewLoading(false)
+//     })
+//     }
+//   },[])
+// console.log(postView);
 
 
-  useEffect(()=>{
-    axios.get(`http://localhost:5000/post/${id}`)
-    .then(res=>setPostView(res.data))
-  },[])
+// const [datar, setDatar] = useState({datar: {}});
 console.log(postView);
+const [err, setErr] = useState('');
+
+useEffect(() => {
+  // 👇️ this only runs once
+  console.log('useEffect ran');
+
+  // 👇️ fetch data from remote API
+  async function getUsers() {
+    try {
+      const response = await fetch(`http://localhost:5000/post/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      console.log('result is: ', JSON.stringify(result, null, 4));
+      setPostView(result);
+      setViewLoading(false)
+    } catch (err) {
+      setErr(err.message);
+    }
+  }
+
+  getUsers();
+}, []); 
+
+
+
+
+
+
 
 
 
@@ -132,7 +178,13 @@ setLikeUpdate(!likeUpdate)
 		<img src={data.thumb} alt="" className="w-full h-60 sm:h-96 object-cover object-center dark:bg-gray-500" />
     <div className='absolute top-4 flex justify-between w-full '>
       <Link href={`/category/${data.categories[0].value}`} className='flex items-center gap-2 ml-3 bg-base-100 px-2 py-1 rounded-full'><BiFolder />{data.categories[0].label}</Link>
-      <div className='flex items-center mr-3 gap-2 bg-base-100 px-2 py-1 rounded-full'><FiEye />{postView.view}</div>
+      <div className='flex items-center mr-3 gap-2 bg-base-100 px-2 py-1 rounded-full'><FiEye />
+      {
+        viewLoading ? <div className='border-2 animate-spin border-dashed rounded-full h-4 w-4'></div>
+        :
+        <div>{postView.view}</div>
+      }
+      </div>
     </div>
 		<div className="p-2 pb-12 mx-auto -mt-16 space-y-6 sm:px-3 sm:mx-3 lg:mx-12 rounded-xl border bg-base-100">
 			<div className="space-y-2 ">
