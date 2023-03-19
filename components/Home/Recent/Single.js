@@ -12,7 +12,7 @@ const Single = ({ post }) => {
   const [comments, setComments] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/comment/${post._id}`)
+      .get(`https://blog-server-sparmankhan.vercel.app/comment/${post._id}`)
       .then((res) => {
         setComments(res.data);
       });
@@ -21,7 +21,7 @@ const Single = ({ post }) => {
   const [postView,setPostView] = useState(0)
 
   useEffect(()=>{
-    axios.get(`http://localhost:5000/post/${post.id}`)
+    axios.get(`https://blog-server-sparmankhan.vercel.app/post/${post.id}`)
     .then(res=>{
       setPostView(res.data)})
       setViewLoad(false)

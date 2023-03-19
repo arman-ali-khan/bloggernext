@@ -18,7 +18,7 @@ const category = () => {
     console.log(category);
     useEffect(()=>{
      if(catId){
-        axios.get(`http://localhost:5000/categories?cat=${catId}`)
+        axios.get(`https://blog-server-sparmankhan.vercel.app/categories?cat=${catId}`)
         .then(res=>setCategories(res.data))
      }
     },[catId])

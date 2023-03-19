@@ -61,7 +61,7 @@ function Update({editPost}) {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/category")
+    fetch("https://blog-server-sparmankhan.vercel.app/category")
       .then((res) => res.json())
       .then((data) => {
         setOptions(data);
@@ -69,7 +69,7 @@ function Update({editPost}) {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://blog-server-sparmankhan.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         setPostId(parseInt(data[0]?.id) + 1);
@@ -109,7 +109,7 @@ function Update({editPost}) {
                 tags: tags,
                 body: postBody.data,
               };
-              fetch(`http://localhost:5000/post/${editPost.id}`, {
+              fetch(`https://blog-server-sparmankhan.vercel.app/post/${editPost.id}`, {
                 method: "PATCH",
                 headers: {
                   "content-type": "application/json",

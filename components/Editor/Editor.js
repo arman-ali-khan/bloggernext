@@ -62,7 +62,7 @@ function Editor({user,dbUser}) {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/category")
+    fetch("https://blog-server-sparmankhan.vercel.app/category")
       .then((res) => res.json())
       .then((data) => {
         setOptions(data);
@@ -70,7 +70,7 @@ function Editor({user,dbUser}) {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://blog-server-sparmankhan.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         setPostId(parseInt(data[0]?.id) + 1);
@@ -117,7 +117,7 @@ function Editor({user,dbUser}) {
           username: dbUser.username,
           date: new Date()
         };
-        fetch("http://localhost:5000/blogs", {
+        fetch("https://blog-server-sparmankhan.vercel.app/blogs", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -133,7 +133,7 @@ function Editor({user,dbUser}) {
           });
       });
 
-    // fetch('http://localhost:5000/blogs',{
+    // fetch('https://blog-server-sparmankhan.vercel.app/blogs',{
     //   method:'POST',
     //   headers:{
     //     'content-type':'application/json'

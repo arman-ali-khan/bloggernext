@@ -6,7 +6,7 @@ const Pinned = () => {
   const [featured,setFeatured] = useState([])
   const [loading,setLoading] = useState(true)
   useEffect(()=>{
-    axios.get('http://localhost:5000/featured')
+    axios.get('https://blog-server-sparmankhan.vercel.app/featured')
     .then(res=>{
       setFeatured(res.data)
       setLoading(false)

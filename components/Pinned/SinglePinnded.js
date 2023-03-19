@@ -7,7 +7,7 @@ import { MdOutlineModeComment } from 'react-icons/md';
 const SinglePinnded = ({post}) => {
     const [comments,setComments] = useState({})
     useEffect(()=>{
-      axios.get(`http://localhost:5000/comment/${post.blog[0]._id}`)
+      axios.get(`https://blog-server-sparmankhan.vercel.app/comment/${post.blog[0]._id}`)
       .then(res=>{
         setComments(res.data)
       })

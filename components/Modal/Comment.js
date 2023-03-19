@@ -16,7 +16,7 @@ const [loading,setLoading] = useState(false)
     //  get comment
 const [comments,setComments] = useState({})
 useEffect(()=>{
-  axios.get(`http://localhost:5000/comment/${post._id}`)
+  axios.get(`https://blog-server-sparmankhan.vercel.app/comment/${post._id}`)
   .then(res=>{
     setComments(res.data)
   })
@@ -36,7 +36,7 @@ const handlePostComment = data =>{
         id: post._id,
         postId: post.id
     }
-    fetch(`http://localhost:5000/comment`,{
+    fetch(`https://blog-server-sparmankhan.vercel.app/comment`,{
         method:'POST',
         headers:{
             'content-type':'application/json'
@@ -54,7 +54,7 @@ const handlePostComment = data =>{
 
 
 const handleDeleteComment = id =>{
-    fetch(`http://localhost:5000/comment/${id}`,{
+    fetch(`https://blog-server-sparmankhan.vercel.app/comment/${id}`,{
         method:'DELETE'
     })
     .then(res=>res.json())

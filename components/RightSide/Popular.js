@@ -7,7 +7,7 @@ const Popular = () => {
   const [populars,setPopulars] =useState([])
   const [loading,setLoading] = useState(true)
   useEffect(()=>{
-    axios.get('http://localhost:5000/popular')
+    axios.get('https://blog-server-sparmankhan.vercel.app/popular')
     .then(res=>{
       setPopulars(res.data)
       setLoading(false)

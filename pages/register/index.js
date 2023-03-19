@@ -26,7 +26,7 @@ const Register = () => {
   // console.log(usernameMatch)
   useEffect(() => {
     fetch(
-      `http://localhost:5000/username?name=${userCheck}`
+      `https://blog-server-sparmankhan.vercel.app/username?name=${userCheck}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -74,7 +74,7 @@ const Register = () => {
 
                 };
 
-                fetch(`http://localhost:5000/user`, {
+                fetch(`https://blog-server-sparmankhan.vercel.app/user`, {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

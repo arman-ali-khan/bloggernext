@@ -12,7 +12,7 @@ console.log(searchData);
     const [search,setSearch] = useState([])
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/search?q=${searchData}`)
+        axios.get(`https://blog-server-sparmankhan.vercel.app/search?q=${searchData}`)
         .then(res=>setSearch(res.data))
     },[searchData])
     console.log(search);

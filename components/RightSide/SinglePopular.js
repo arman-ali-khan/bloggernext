@@ -7,7 +7,7 @@ import { MdOutlineModeComment } from 'react-icons/md';
 const SinglePopular = ({post}) => {
     const [comments,setComments] = useState({})
     useEffect(()=>{
-      axios.get(`http://localhost:5000/comment/${post._id}`)
+      axios.get(`https://blog-server-sparmankhan.vercel.app/comment/${post._id}`)
       .then(res=>{
         setComments(res.data)
       })

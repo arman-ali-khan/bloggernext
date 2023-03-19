@@ -41,7 +41,7 @@ const [viewLoading,setViewLoading] = useState(true)
 
 //   useEffect(()=>{
 //     if(typeof(id) ==='string'){
-//       axios.get(`http://localhost:5000/post/${id}`)
+//       axios.get(`https://blog-server-sparmankhan.vercel.app/post/${id}`)
 //     .then(res=>{
 //       setPostView(res.data)
 //       setViewLoading(false)
@@ -62,7 +62,7 @@ useEffect(() => {
   // 👇️ fetch data from remote API
   async function getUsers() {
     try {
-      const response = await fetch(`http://localhost:5000/post/${id}`, {
+      const response = await fetch(`https://blog-server-sparmankhan.vercel.app/post/${id}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -97,7 +97,7 @@ const [likeLoading,setLikeLoading] = useState(false)
 
 // like update
 useEffect(()=>{
-  axios.get(`http://localhost:5000/likes/${data._id}`)
+  axios.get(`https://blog-server-sparmankhan.vercel.app/likes/${data._id}`)
   .then(res=>{
     setLikes(res.data)
   })
@@ -107,7 +107,7 @@ useEffect(()=>{
 
 const [userLike,setUserLike] = useState({})
 useEffect(()=>{
-  axios.get(`http://localhost:5000/like/${data._id}?email=${user?.email}`)
+  axios.get(`https://blog-server-sparmankhan.vercel.app/like/${data._id}?email=${user?.email}`)
   .then(res=>{
     setUserLike(res.data)
   })
@@ -126,7 +126,7 @@ const handleLike = e =>{
     id: e,
     title: data.title
   }
-  fetch(`http://localhost:5000/like`,{
+  fetch(`https://blog-server-sparmankhan.vercel.app/like`,{
     method:'post',
     headers:{
       'content-type':'application/json'
@@ -147,7 +147,7 @@ const handleLike = e =>{
 // unlike
 
 const handleUnLike= id =>{
-  fetch(`http://localhost:5000/like/${id}?email=${user?.email}`,{
+  fetch(`https://blog-server-sparmankhan.vercel.app/like/${id}?email=${user?.email}`,{
     method:'DELETE',
   })
   .then(res=>res.json())
@@ -170,7 +170,7 @@ setLikeUpdate(!likeUpdate)
 
  const [comments,setComments] = useState({})
  useEffect(()=>{
-   axios.get(`http://localhost:5000/comment/${data._id}`)
+   axios.get(`https://blog-server-sparmankhan.vercel.app/comment/${data._id}`)
    .then(res=>{
      setComments(res.data)
    })
@@ -378,7 +378,7 @@ export default blog;
 export const getStaticPaths = async () => {
 
     //fetch data from api
-    const res = await fetch(`http://localhost:5000/blogs`);
+    const res = await fetch(`https://blog-server-sparmankhan.vercel.app/blogs`);
     const data = await res.json();
  
     //create paths for each item in the data
@@ -399,7 +399,7 @@ export const getStaticPaths = async () => {
   // write a get staticprops function for nextjs dynamic api call
   export async function getStaticProps(context) {
     const id = context.params.blogId
-    const res = await fetch(`http://localhost:5000/post/${id}`);
+    const res = await fetch(`https://blog-server-sparmankhan.vercel.app/post/${id}`);
     const data = await res.json();
     return {
       props: {

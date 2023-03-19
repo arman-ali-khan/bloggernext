@@ -30,7 +30,7 @@ const AuthContext = ({ children }) => {
 
     // DB User
     useEffect(() => {
-      axios.get(`http://localhost:5000/dbUser?email=${user?.email}`)
+      axios.get(`https://blog-server-sparmankhan.vercel.app/dbUser?email=${user?.email}`)
       .then((response) => {
         setDbUser(response.data);
       }).catch(function (error) {

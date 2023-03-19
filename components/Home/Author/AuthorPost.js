@@ -3,10 +3,10 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 const AuthorPost = ({data}) => {
-    // http://localhost:5000/post?email=armankhan@gmail.com
+    // https://blog-server-sparmankhan.vercel.app/post?email=armankhan@gmail.com
     
     const [posts,setPosts] = useState([])
-    axios.get(`http://localhost:5000/post?email=${data?.email}`)
+    axios.get(`https://blog-server-sparmankhan.vercel.app/post?email=${data?.email}`)
     .then(response => {
         setPosts(response.data);
       });

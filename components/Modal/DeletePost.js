@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 const DeletePost = ({deleteId}) => {
     const router = useRouter()
     const handleDeletePost = (id) =>{
-        fetch(`http://localhost:5000/post/${id}`,{
+        fetch(`https://blog-server-sparmankhan.vercel.app/post/${id}`,{
           method:'DELETE',
           headers:{
             'content-type':'application/json'

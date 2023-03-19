@@ -8,7 +8,7 @@ const Categories = () => {
     const {category,setCategory} = useContext(contextProvider)
     const [categories,setCategories]  = useState([])
     useEffect(()=>{
-      axios.get(`http://localhost:5000/category`)
+      axios.get(`https://blog-server-sparmankhan.vercel.app/category`)
       .then(res=>setCategories(res.data))
     },[])
     return (

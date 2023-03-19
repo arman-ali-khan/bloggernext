@@ -27,7 +27,7 @@ export default Recent;
 
 // write a get staticprops function for nextjs dynamic api call
 // export async function getStaticProps() {
-//   const res = await fetch(`http://localhost:5000/blogs/blogs`);
+//   const res = await fetch(`https://blog-server-sparmankhan.vercel.app/blogs/blogs`);
 //   const data = await res.json();
 // console.log(data)
 //   return {
