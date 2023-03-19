@@ -15,13 +15,15 @@ import axios from "axios";
 
 export const contextProvider = createContext();
 export const auth = getAuth(app);
+
 const AuthContext = ({ children }) => {
+  // Blog title
+  const title = 'Blogger Next'
   const [commented,setCommented] = useState(false)
   const [user, setUser] = useState({});
   const [dbUser, setDbUser] = useState({});
 
-  // Blog title
-  const title = 'Blogger Next'
+
   // bottombar category show and hide
   const [category,setCategory]=useState(false)
 
@@ -78,6 +80,7 @@ const AuthContext = ({ children }) => {
     });
     return () => unsubscribe();
   }, []);
+
 
 
 

@@ -2,11 +2,9 @@ import { Html, Head, Main, NextScript } from 'next/document'
 import Script from 'next/script'
 
 export default function Document() {
-  const dark = typeof window !== 'undefined' && localStorage.getItem('theme')
-
-  console.log(dark);
+ 
   return (
-    <Html data-theme={dark} scroll-behavior='smooth' lang="en">
+    <Html data-theme='dark' scroll-behavior='smooth' lang="en">
       <Head >
         
       <link href="https://fonts.maateen.me/bensen/font.css" rel="stylesheet" />
