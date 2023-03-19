@@ -17,7 +17,7 @@ export default function Home() {
 
 const [editPost,setEditPost] = useState({})
 useEffect(()=>{
-    axios.get(`https://blog-server-sparmankhan.vercel.app/post/${id}`)
+    axios.get(`http://localhost:5000/post/${id}`)
     .then(res=>{
         setEditPost(res.data)
     })

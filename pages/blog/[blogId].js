@@ -96,7 +96,7 @@ const [likeLoading,setLikeLoading] = useState(false)
 
 // like update
 useEffect(()=>{
-  axios.get(`https://blog-server-sparmankhan.vercel.app/likes/${data._id}`)
+  axios.get(`http://localhost:5000/likes/${data._id}`)
   .then(res=>{
     setLikes(res.data)
   })
@@ -106,7 +106,7 @@ useEffect(()=>{
 
 const [userLike,setUserLike] = useState({})
 useEffect(()=>{
-  axios.get(`https://blog-server-sparmankhan.vercel.app/like/${data._id}?email=${user?.email}`)
+  axios.get(`http://localhost:5000/like/${data._id}?email=${user?.email}`)
   .then(res=>{
     setUserLike(res.data)
   })
@@ -125,7 +125,7 @@ const handleLike = e =>{
     id: e,
     title: data.title
   }
-  fetch(`https://blog-server-sparmankhan.vercel.app/like`,{
+  fetch(`http://localhost:5000/like`,{
     method:'post',
     headers:{
       'content-type':'application/json'
@@ -146,7 +146,7 @@ const handleLike = e =>{
 // unlike
 
 const handleUnLike= id =>{
-  fetch(`https://blog-server-sparmankhan.vercel.app/like/${id}?email=${user?.email}`,{
+  fetch(`http://localhost:5000/like/${id}?email=${user?.email}`,{
     method:'DELETE',
   })
   .then(res=>res.json())
@@ -169,7 +169,7 @@ setLikeUpdate(!likeUpdate)
 
  const [comments,setComments] = useState({})
  useEffect(()=>{
-   axios.get(`https://blog-server-sparmankhan.vercel.app/comment/${data._id}`)
+   axios.get(`http://localhost:5000/comment/${data._id}`)
    .then(res=>{
      setComments(res.data)
    })
@@ -295,6 +295,8 @@ setLikeUpdate(!likeUpdate)
             <Comment post={deleteId} />
         </div>
 
+
+{/* Mobile Like comment */}
         <div className={`flex gap-2 md:hidden py-4 fixed duration-300 transition-all top-1/2 ${commentShow?'':'ml-12'}  items-center`}>
  <div className={`flex flex-col gap-2 py-4 fixed  top-1/2 mx-3  items-center  bg-base-100 px-2 rounded-lg duration-300 transition-all ${commentShow ? '-left-20':'left-0'}`}>
   {/* Like */}
@@ -303,14 +305,30 @@ setLikeUpdate(!likeUpdate)
   {/* onClick={()=>handleUnLike(data._id)}  */}
     {
       userLike.email ? 
-      <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Unlike">
+      <>
+      {
+        likeLoading ? 
+        <div className='w-9 h-9 overflow-hidden'>
+          <Lottie className='w-9 h-9 overflow-hidden' animationData={gettingLike} loop={false} />
+        </div>
+         :
+          <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Unlike">
          <RiHeart3Fill onClick={()=>handleUnLike(data._id)} className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
       </div>
+      }
+     </>
      
       :
-      <div className="hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
+      <>
+      {
+        likeLoading ?  <div  className='w-9 h-9 overflow-hidden'>
+        <Lottie className='w-9 h-9 overflow-hidden' animationData={gettingLike} loop={false} />
+      </div>
+      :  <div className="hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
         <RiHeart3Line onClick={()=>handleLike(data._id)} className="text-rose-600 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-200 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1 " />
       </div>
+      }
+      </>
     }
    
     <p >{likes.length}</p>
@@ -357,7 +375,7 @@ export default blog;
 export const getStaticPaths = async () => {
 
     //fetch data from api
-    const res = await fetch(`https://blog-server-sparmankhan.vercel.app/blogs`);
+    const res = await fetch(`http://localhost:5000/blogs`);
     const data = await res.json();
  
     //create paths for each item in the data
@@ -378,7 +396,7 @@ export const getStaticPaths = async () => {
   // write a get staticprops function for nextjs dynamic api call
   export async function getStaticProps(context) {
     const id = context.params.blogId
-    const res = await fetch(`https://blog-server-sparmankhan.vercel.app/post/${id}`);
+    const res = await fetch(`http://localhost:5000/post/${id}`);
     const data = await res.json();
     return {
       props: {

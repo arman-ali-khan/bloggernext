@@ -15,7 +15,7 @@ const userId = () => {
   const id = router.query.userId?.split('@').join('')
   const [user,setUser] = useState({})
  useEffect(() => {
-    axios.get(`https://blog-server-sparmankhan.vercel.app/user?username=${id}`)
+    axios.get(`http://localhost:5000/user?username=${id}`)
     .then(res=>{
         setUser(res.data)
     })

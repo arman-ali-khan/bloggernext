@@ -7,17 +7,18 @@ import { MdOutlineModeComment } from 'react-icons/md';
 const SinglePinnded = ({post}) => {
     const [comments,setComments] = useState({})
     useEffect(()=>{
-      axios.get(`https://blog-server-sparmankhan.vercel.app/comment/${post.blog[0]._id}`)
+      axios.get(`http://localhost:5000/comment/${post.blog[0]._id}`)
       .then(res=>{
         setComments(res.data)
       })
       
     },[post])
     return (
-        <div className='sm:flex relative gap-2 w-full  items-center border border-gray-700 shadow-lg my-2 rounded-xl p-3'>
-            <p className='absolute top-0 right-0 dark:bg-gray-600 bg-blue-200 font-semibold text-blue-600 px-3 rounded-xl rounded-br-none rounded-tl-none'> Pinned</p>
+        <div className='flex relative gap-2 w-full  items-center border border-base-300 shadow-lg my-2 rounded-xl p-3'>
+            <p className='absolute top-0 right-0 dark:bg-gray-600 bg-blue-200 bg-opacity-40 blur-sm  font-semibold text-blue-600 px-3 rounded-xl rounded-br-none rounded-tl-none'> Featured</p>
+            <p className='absolute top-0 right-0 dark:bg-gray-600  bg-opacity-40  font-semibold text-black px-3 rounded-xl rounded-br-none rounded-tl-none'> Featured</p>
      <div>
-     <div className='md:w-64 sm:w-44 h-32'>
+     <div className='md:w-44 sm:w-32 w-24 h-24 md:h-32 overflow-hidden rounded-xl'>
         <img className='rounded-xl w-full h-full object-cover hover:scale-105 duration-300   hover:duration-300' src={post.blog[0]?.thumb} alt="" />
       </div>
      </div>
@@ -27,10 +28,10 @@ const SinglePinnded = ({post}) => {
         <p><span>in</span> {post.blog[0].categories[0]?.label}</p>
         <p className='flex items-center gap-1 font-semibold'><MdOutlineModeComment className='text-lg' /> {comments.length}</p>
         </div>
-        <Link href={`/blog/${post.blog[0].id}`} className='text-xl font-bold  '> {post.blog[0].title}</Link>
+        <Link href={`/blog/${post.blog[0].id}`} className='text-lg font-bold  '> {post.blog[0].title}</Link>
 
 <div className='inline-flex bottom justify-between w-full'>
-<p>Published {moment(post?.date).fromNow()} </p> 
+<p><span className='hidden sm:inline-block'>Published</span> {moment(post?.date).fromNow()} </p> 
 <p className="flex items-center gap-1 font-semibold"><svg className="w-5 h-5 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg> {post?.blog[0].view}</p>
 </div>
       </div>

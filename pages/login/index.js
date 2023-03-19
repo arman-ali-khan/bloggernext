@@ -21,7 +21,7 @@ const index = () => {
         })
     }
     return (
-        <Layout>
+        <Layout title={'Login || Blogger Next'}>
             <form onSubmit={handleSubmit(handleLoginUser)} className="hero min-h-screen bg-base-200 block md:grid">
   <div className="hero-content flex flex-col md:flex-row ">
     <div className="text-center w-full ">

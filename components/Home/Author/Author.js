@@ -8,7 +8,7 @@ const Author = ({data}) => {
     const {user} = useContext(contextProvider)
     const [author,setAuthor] = useState({})
     useEffect(()=>{
-        axios.get(`https://blog-server-sparmankhan.vercel.app/author?name=${data.username}`)
+        axios.get(`http://localhost:5000/author?name=${data.username}`)
         .then(res=>{
             setAuthor(res.data)
         })

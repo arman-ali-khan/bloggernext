@@ -1,15 +1,12 @@
 import axios from 'axios';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { BiBookmarkAlt } from 'react-icons/bi';
-import { MdOutlineModeComment } from 'react-icons/md';
 import SinglePinnded from './SinglePinnded';
 
 const Pinned = () => {
   const [featured,setFeatured] = useState([])
   const [loading,setLoading] = useState(true)
   useEffect(()=>{
-    axios.get('https://blog-server-sparmankhan.vercel.app/featured')
+    axios.get('http://localhost:5000/featured')
     .then(res=>{
       setFeatured(res.data)
       setLoading(false)
@@ -22,11 +19,11 @@ const Pinned = () => {
     </div>
       {
         loading ?  <div className="flex flex-col sm:flex-row  rounded shadow-md w-full animate-pulse h-64 sm:h-36 ">
-        <div className="h-44 w-full sm:h-full sm:w-44 md:w-64 rounded bg-gray-700"></div>
-        <div className="flex-1 px-4  space-y-4 py-4 bg-gray-500">
-          <div className="w-full h-6 rounded bg-gray-700"></div>
-          <div className="w-full h-6 rounded bg-gray-700"></div>
-          <div className="w-full h-6 rounded bg-gray-700"></div>
+        <div className="h-44 w-full sm:h-full sm:w-44 md:w-64 rounded bg-base-300"></div>
+        <div className="flex-1 px-4  space-y-4 py-4 bg-base-100">
+          <div className="w-full h-6 rounded bg-base-300"></div>
+          <div className="w-full h-6 rounded bg-base-300"></div>
+          <div className="w-full h-6 rounded bg-base-300"></div>
         </div>
       </div>
       :

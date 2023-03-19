@@ -30,7 +30,7 @@ const Category = ({category}) => {
               {category?.title.split(" ").length > 13 && "..."}
             </Link>
                     {/* <h3 className='text-base md:text-lg'>{category?.title}</h3> */}
-                    <p className='hidden md:block'>{category?.body.replace(/<\/?[^>]+>/gi, '').split(' ').slice(0,30).join(' ')}</p>
+                    <p className='hidden md:block text-sm mb-2'>{category?.body.replace(/<\/?[^>]+>/gi, '').split(' ').slice(0,30).join(' ')}</p>
                     <div className="flex justify-between text-xs">
               <p>{moment(category?.date).fromNow()} </p>
               <p className="flex items-center gap-1 font-semibold">

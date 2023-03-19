@@ -10,6 +10,7 @@ import { contextProvider } from "../../context/AuthContext";
 import Logout from "../Modal/Logout";
 import axios from "axios";
 import Notify from "../Modal/Notify";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const BottomBar = () => {
   const {googleLogin,user,logOut,dbUser,category,setCategory} = useContext(contextProvider)
@@ -60,11 +61,26 @@ useEffect( () => {
 
     return () => window.removeEventListener('scroll', topHandleScroll)
 })
+
+
+const [theme, setTheme] = React.useState(typeof window !== 'undefined' && localStorage.getItem('theme'));
+const toggleTheme = () => {
+  setTheme(theme === 'dark' ? 'light' : 'dark');
+  localStorage.setItem('theme',theme === 'dark' ? 'light' : 'dark')
+};
+// initially set the theme and "listen" for changes to apply them to the HTML tag
+React.useEffect(() => {
+  document.querySelector('html').setAttribute('data-theme', theme);
+}, [theme]);
+
+
   return (
-    <div className={`${visible ? ' fixed bottom-5 sm:bottom-12  duration-500 transition-all' : 'absolute md:fixed -top-44 md:bottom-12 translate-y-10 md:translate-y-0 duration-500 transition-all'} w-full duration-500 transition-all !z-50 object-center items-center justify-center md:fixed md:bottom-12 sm:bottom-12 `} >
+    <div className={`${visible ? ' fixed bottom-5 sm:bottom-12  duration-500 transition-all' : 'hidden md:fixed -top-44 md:bottom-12 translate-y-10 md:translate-y-0 duration-500 transition-all'} w-full duration-500 transition-all !z-50 object-center items-center justify-center md:fixed md:bottom-12 sm:bottom-12 `} >
+
       
-      <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-white md:bg-opacity-70 bg-gray-600  opacity-90 md:bg-gray-600  rounded-full">
-       
+      
+      <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-base md:bg-opacity-70 bg-base-300  opacity-90 md:bg-base-200  rounded-full">
+    
         <ul className="flex relative justify-center ">
           <li className="list-none">
          
@@ -74,7 +90,7 @@ useEffect( () => {
             {/* < className="btn btn-primary drawer-button">Open drawer</> */}
           </li>
           <li className="list-none">
-           
+          
             <div className="dropdown text- w-full dropdown-top sm:dropdown-end">
   <label tabIndex={1} className="px-6 sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:flex tooltip-open tooltip-top"  data-tip="Message" href={'/'}><BiMessageSquareMinus /></label>
   <ul tabIndex={1} className="dropdown-content border menu p-2 shadow bg-base-100 rounded-box w-64 overflow-hidden ">
@@ -89,7 +105,7 @@ useEffect( () => {
           </li>
           {/* HOme  */}
           <li className="list-none">
-            <Link className="px-6 sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Home" href={'/'}><img className="w-6 h-6" src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamodifier-Design_tcxawk.svg' alt="" /></Link>
+            <Link className="sm:px-6 px-2 w-full md:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Home" href={'/'}><img className="w-6 h-6" src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677914511/fav_dtornq.svg' alt="" /></Link>
           </li>
           {/* Notifications */}
           <li className="list-none">
@@ -111,6 +127,15 @@ useEffect( () => {
     <li className=""><a className="text-center flex justify-center">{dbUser.name}</a></li>
     <li className="list-none"><a>Settings</a></li>
     <li className="list-none"><a>Dashboard</a></li>
+{/* Day Night */}
+<label className="swap swap-rotate !place-content-start px-4 py-3">
+      <input onClick={toggleTheme}  type="checkbox" />
+    <div className="swap-on flex items-center justify-start gap-2 "><MdDarkMode className="text-2xl" />Light </div>
+      <div className="swap-off flex items-center justify-start gap-2 "><MdLightMode className="text-2xl" /> Dark</div>
+    
+    </label>
+
+   
     <li className="list-none">          
 <label className="bg-red-200 text-rose-600" htmlFor="logoutModal">Logout</label></li>
   </ul>
@@ -119,6 +144,13 @@ useEffect( () => {
    <div></div>
     <li className="list-none"><Link href={'/login'}>Login</Link></li>
     <li className="list-none"><Link href={'/register'}>Signup</Link></li>
+ {/* Day Night */}
+    <label className="swap swap-rotate !place-content-start px-4 py-3">
+      <input onClick={toggleTheme}  type="checkbox" />
+    <div className="swap-on flex items-center justify-start gap-2 "><MdDarkMode className="text-2xl" />Light </div>
+      <div className="swap-off flex items-center justify-start gap-2 "><MdLightMode className="text-2xl" /> Dark</div>
+    
+    </label>
   </ul>
 }
 </div>
@@ -129,7 +161,7 @@ useEffect( () => {
       <Logout />
       <Notify />
       {/* Back to top */}
-      <a href="#top" className={` ${topvisible ? '   -translate-y-10':'translate-y-0'} fixed -translate-y-14 right-6 bg-base-100 rounded-full px-2`}>Top</a>
+      <a href="#top" className={` ${topvisible ? '   -translate-y-10':'-translate-y-14'} fixed -translate-y-14 right-6 bg-base-100 rounded-full px-2`}>Top</a>
     </div>
   );
 };

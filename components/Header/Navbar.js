@@ -45,7 +45,7 @@ useEffect( () => {
         Android
           <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
         </a>
-        <ul className="p-2  bg-gray-700 ">
+        <ul className="p-2  bg-base-300 ">
           <li><a>Android Tips</a></li>
           <li><a>Apps Review</a></li>
           <li><a>Android Root</a></li>
@@ -56,7 +56,7 @@ useEffect( () => {
         Education
           <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
         </a>
-        <ul className="p-2 bg-gray-700 ">
+        <ul className="p-2 bg-base-300 ">
           <li><a>Guidlines</a></li>
           <li><a>Exam Result</a></li>
           <li><a>Pdf Books</a></li>
@@ -67,7 +67,7 @@ useEffect( () => {
         Programming
           <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
         </a>
-        <ul className="p-2 bg-gray-700 ">
+        <ul className="p-2 bg-base-300 ">
           <li><a>C Programming</a></li>
           <li><a>JavaScript</a></li>
           <li><a>PHP</a></li>
@@ -96,7 +96,7 @@ h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamod
         Android
           <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
         </a>
-        <ul className="p-2  bg-gray-700 ">
+        <ul className="p-2  bg-base-300 ">
           <li><a>Android Tips</a></li>
           <li><a>Apps Review</a></li>
           <li><a>Android Root</a></li>
@@ -108,7 +108,7 @@ h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamod
         Education
           <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
         </a>
-        <ul className="p-2 bg-gray-700 ">
+        <ul className="p-2 bg-base-300 ">
           <li><a>Guidlines</a></li>
           <li><a>Exam Result</a></li>
           <li><a>Pdf Books</a></li>
@@ -120,7 +120,7 @@ h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamod
         Programming
           <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
         </a>
-        <ul className="p-2 bg-gray-700 ">
+        <ul className="p-2 bg-base-300 ">
           <li><a>C Programming</a></li>
           <li><a>JavaScript</a></li>
           <li><a>PHP</a></li>

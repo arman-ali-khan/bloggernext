@@ -7,7 +7,7 @@ const Popular = () => {
   const [populars,setPopulars] =useState([])
   const [loading,setLoading] = useState(true)
   useEffect(()=>{
-    axios.get('https://blog-server-sparmankhan.vercel.app/popular')
+    axios.get('http://localhost:5000/popular')
     .then(res=>{
       setPopulars(res.data)
       setLoading(false)
@@ -50,7 +50,7 @@ const Popular = () => {
        :
        
      
-      <div className='flex flex-col gap-2'>
+      <div className='grid grid-cols-1 md:flex md:flex-col gap-2 sm:grid sm:grid-cols-2'>
         {
           populars.map(post=><SinglePopular key={post.id} post={post} />)
         }

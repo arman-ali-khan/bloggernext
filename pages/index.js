@@ -20,7 +20,7 @@ export default function Home({data}) {
 }
 // write a get staticprops function for nextjs dynamic api call
 export async function getStaticProps() {
-  const res = await fetch(`https://blog-server-sparmankhan.vercel.app/blogs`);
+  const res = await fetch(`http://localhost:5000/blogs`);
   const data = await res.json();
 
   return {

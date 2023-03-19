@@ -5,11 +5,13 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineModeComment } from "react-icons/md";
 
 const Single = ({ post }) => {
- 
+  // post view load
+ const [viewLoad,setViewLoad] = useState(true)
+
   const [comments, setComments] = useState({});
   useEffect(() => {
     axios
-      .get(`https://blog-server-sparmankhan.vercel.app/comment/${post._id}`)
+      .get(`http://localhost:5000/comment/${post._id}`)
       .then((res) => {
         setComments(res.data);
       });
@@ -21,23 +23,24 @@ const Single = ({ post }) => {
     axios.get(`http://localhost:5000/post/${post.id}`)
     .then(res=>{
       setPostView(res.data)})
+      setViewLoad(false)
   },[post])
 
   return (
     <>
       {post.publish && (
-        <div className="w-full gap-2 items-center   px-2 shadow-lg border border-gray-700 rounded-xl ">
+        <div className="w-full gap-2 items-center   md:px-2 shadow-lg border border-base-300 rounded-xl flex sm:block  ">
           <div>
-            <div className="w-68 h-32">
+            <div className=" w-24 h-24 sm:w-full sm:h-36  overflow-hidden rounded-xl">
               <img
-                className="rounded-xl w-full h-full hover:scale-105 duration-300   hover:duration-300 object-cover"
+                className="rounded-xl  w-24 sm:w-full h-24 sm:h-36  hover:scale-105 duration-300   hover:duration-300 object-cover"
                 src={post.thumb}
                 alt=""
               />
             </div>
           </div>
           <div className="w-full">
-            <div className="text-xs flex justify-between">
+            <div className="text-xs flex justify-between mr-2">
               <p>
                 <span>in</span> {post.categories[0]?.label}
               </p>
@@ -54,9 +57,9 @@ const Single = ({ post }) => {
               {post.title.split(" ").length > 13 && "..."}
             </Link>
 
-            <div className="flex justify-between text-xs">
+            <div className="flex justify-between text-xs mr-2">
               <p>{moment(post?.date).fromNow()} </p>
-              <p className="flex items-center gap-1 font-semibold">
+              <div className="flex items-center gap-1 font-semibold">
                 <svg
                   className="w-5 h-5 "
                   fill="none"
@@ -70,9 +73,16 @@ const Single = ({ post }) => {
                     strokeWidth="2"
                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
                   ></path>
-                </svg>{" "}
-                {postView?.view}
-              </p>
+                </svg>
+                {
+                  viewLoad ? <div className="h-4 w-4 rounded-full border-2 border-dashed animate-spin"></div>
+                  :
+                  <>
+                  {postView?.view}
+                  </>
+                }
+                
+              </div>
             </div>
           </div>
         </div>
