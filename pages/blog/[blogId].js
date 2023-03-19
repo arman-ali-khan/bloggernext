@@ -17,6 +17,9 @@ import {HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight} from 'react-ico
 import Categories from '../../components/Categories/Categories';
 import { v4 as uuidv4 } from 'uuid';
 import { FiEye } from 'react-icons/fi';
+import Lottie from "lottie-react";
+import gettingLike from '../../assest/lottie/love.json'
+
 
 
 const blog = ({data}) => {
@@ -84,7 +87,8 @@ useEffect(() => {
 
 
 
-
+// like loading
+const [likeLoading,setLikeLoading] = useState(false)
 
 
 
@@ -93,7 +97,9 @@ useEffect(() => {
 // like update
 useEffect(()=>{
   axios.get(`https://blog-server-sparmankhan.vercel.app/likes/${data._id}`)
-  .then(res=>setLikes(res.data))
+  .then(res=>{
+    setLikes(res.data)
+  })
 },[likeUpdate])
 
 // Get like 
@@ -110,6 +116,7 @@ useEffect(()=>{
 
 
 const handleLike = e =>{
+  setLikeLoading(true)
   const likeData = {
     name: dbUser.name,
     email: dbUser.email,
@@ -131,6 +138,7 @@ const handleLike = e =>{
     toast.success('Liked',{
       icon: '❤️',
     })
+    setLikeLoading(false)
   })
 }
 
@@ -222,14 +230,33 @@ setLikeUpdate(!likeUpdate)
   {/* onClick={()=>handleUnLike(data._id)}  */}
     {
       userLike.email ? 
-      <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Unlike">
+     <>
+      {
+        likeLoading ? 
+        <div className='w-9 h-9 overflow-hidden'>
+          <Lottie className='w-9 h-9 overflow-hidden' animationData={gettingLike} loop={false} />
+        </div>
+         :
+          <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Unlike">
          <RiHeart3Fill onClick={()=>handleUnLike(data._id)} className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
       </div>
+      }
+     </>
+     
      
       :
-      <div className="hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
+
+      <>
+      {
+        likeLoading ?  <div  className='w-9 h-9 overflow-hidden'>
+        <Lottie className='w-9 h-9 overflow-hidden' animationData={gettingLike} loop={false} />
+      </div>
+      :  <div className="hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
         <RiHeart3Line onClick={()=>handleLike(data._id)} className="text-rose-600 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-200 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1 " />
       </div>
+      }
+      </>
+    
     }
    
     <p >{likes.length}</p>
