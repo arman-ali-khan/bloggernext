@@ -51,7 +51,7 @@ const [viewLoading,setViewLoading] = useState(true)
 
 
 // const [datar, setDatar] = useState({datar: {}});
-console.log(postView);
+
 const [err, setErr] = useState('');
 
 useEffect(() => {

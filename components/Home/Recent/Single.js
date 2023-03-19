@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineModeComment } from "react-icons/md";
 
 const Single = ({ post }) => {
-  console.log(post);
+ 
   const [comments, setComments] = useState({});
   useEffect(() => {
     axios
