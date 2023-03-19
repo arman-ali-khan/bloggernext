@@ -9,7 +9,7 @@ import registerLottie from '../../assest/lottie/login.json'
 
 const index = () => {
     const router = useRouter()
-    const {userLogin} = useContext(contextProvider)
+    const {userLogin,title} = useContext(contextProvider)
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -21,7 +21,7 @@ const index = () => {
         })
     }
     return (
-        <Layout title={'Login || Blogger Next'}>
+        <Layout title={`Login || ${title}`}>
             <form onSubmit={handleSubmit(handleLoginUser)} className="hero min-h-screen bg-base-200 block md:grid">
   <div className="hero-content flex flex-col md:flex-row ">
     <div className="text-center w-full ">

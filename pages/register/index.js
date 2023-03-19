@@ -8,7 +8,7 @@ import Lottie from "lottie-react";
 import registerLottie from '../../assest/lottie/login.json'
 
 const Register = () => {
-  const { createUser, handleUserUpdate } = useContext(contextProvider);
+  const { createUser, handleUserUpdate, title } = useContext(contextProvider);
   const [value, setValue] = useState("");
 
   const router = useRouter();
@@ -95,7 +95,7 @@ const Register = () => {
   // console.log(show)
 
   return (
-    <Layout>
+    <Layout title={`Register || ${title}`}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="hero min-h-screen bg-base-200 block md:grid">
           <div className="hero-content flex flex-col md:flex-row ">
