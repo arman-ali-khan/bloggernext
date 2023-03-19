@@ -66,8 +66,8 @@ useEffect( () => {
 
 const [theme, setTheme] = React.useState(typeof window !== 'undefined' && localStorage.getItem('theme'));
 const toggleTheme = () => {
-  setTheme(theme === 'dark' ? 'light' : 'dark');
-  localStorage.setItem('theme',theme === 'dark' ? 'light' : 'dark')
+  setTheme(theme === 'dracula' ? 'light' : 'dracula');
+  localStorage.setItem('theme',theme === 'dracula' ? 'light' : 'dracula')
 };
 // initially set the theme and "listen" for changes to apply them to the HTML tag
 React.useEffect(() => {

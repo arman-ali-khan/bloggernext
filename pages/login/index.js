@@ -26,7 +26,7 @@ const index = () => {
         })
     }
     return (
-        <Layout title={`Login || ${title}`}>
+        <Layout title={`Login || ${title?.title}`}>
             <form onSubmit={handleSubmit(handleLoginUser)} className="hero min-h-screen bg-base-200 block md:grid">
   <div className="hero-content flex flex-col md:flex-row ">
     <div className="text-center w-full ">

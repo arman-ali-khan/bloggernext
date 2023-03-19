@@ -18,9 +18,9 @@ export const auth = getAuth(app);
 
 const AuthContext = ({ children }) => {
   // Blog title
-  const title = 'Blogger Next'
+  const title = {title:'Blogger Next'}
   const [commented,setCommented] = useState(false)
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({user:'samrat'});
   const [dbUser, setDbUser] = useState({});
 
 
@@ -70,9 +70,11 @@ const AuthContext = ({ children }) => {
   const handleUserUpdate = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
+
   const logOut = () => {
     return signOut(auth);
   };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

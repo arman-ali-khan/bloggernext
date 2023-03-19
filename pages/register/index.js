@@ -97,7 +97,7 @@ const Register = () => {
   // console.log(show)
 
   return (
-    <Layout title={`Register || ${title}`}>
+    <Layout title={`Register || ${title?.title}`}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="hero min-h-screen bg-base-200 block md:grid">
           <div className="hero-content flex flex-col md:flex-row ">

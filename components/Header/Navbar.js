@@ -79,7 +79,7 @@ useEffect( () => {
     </div>
     <Link href={'/'} className=" normal-case text-xl w-8 sm:w-12 h-8 sm:h-12">
       <img className='sm:w-12 sm:h-12 w-8
-h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677842885/Mediamodifier-Design_tcxawk.svg' alt="" />
+h-8' src='https://res.cloudinary.com/dcckbmhft/image/upload/v1677914511/fav_dtornq.svg' alt="" />
       </Link>
   </div>
   <div className="navbar-center hidden lg:flex">

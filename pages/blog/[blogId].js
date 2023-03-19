@@ -232,16 +232,16 @@ setLikeUpdate(!likeUpdate)
     {
       userLike?.email ? 
      <>
-      {
-        likeLoading ? 
-        <div className='w-9 h-9 overflow-hidden'>
+      {/* {
+        likeLoading ?  */}
+        <div onClick={()=>handleUnLike(data._id)}  className='w-9 h-9 hover:bg-base-200 rounded-full overflow-hidden'>
           <Lottie className='w-9 h-9 overflow-hidden' animationData={gettingLike} loop={false} />
         </div>
-         :
+         {/* :
           <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Unlike">
          <RiHeart3Fill onClick={()=>handleUnLike(data._id)} className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
       </div>
-      }
+      } */}
      </>
      
      
@@ -249,7 +249,8 @@ setLikeUpdate(!likeUpdate)
 
       <>
       {
-        likeLoading ?  <div  className='w-9 h-9 overflow-hidden'>
+        likeLoading ?  
+        <div className='w-9 h-9 overflow-hidden'>
         <Lottie className='w-9 h-9 overflow-hidden' animationData={gettingLike} loop={false} />
       </div>
       :  <div className="hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Like">
@@ -260,11 +261,11 @@ setLikeUpdate(!likeUpdate)
     
     }
    
+    {/* // Mobile Non logged user like btn */}
     <p >{likes?.length}</p>
   </div>
     :
     <div className="flex flex-col items-center gap-2">
-    
      
         <div  className=" hover:tooltip hover:tooltip-open hover:tooltip-right  hover:flex" data-tip="Login to like">
            <RiHeart3Fill  className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
@@ -334,6 +335,7 @@ setLikeUpdate(!likeUpdate)
    
     <p >{likes?.length}</p>
   </div>
+  // Mobile Non logged user like btn
     :
     <div className="flex flex-col items-center gap-2">
     

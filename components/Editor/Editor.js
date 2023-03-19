@@ -13,15 +13,19 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import loading from '../../assest/loading.json'
 import Private from "../Private/Private";
+import { useRouter } from "next/router";
 
 
-function Editor() {
+function Editor({user,dbUser}) {
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  
+
   const [posting, setPosting] = useState(false);
 
   const [file, setFile] = useState();
@@ -72,9 +76,10 @@ function Editor() {
         setPostId(parseInt(data[0]?.id) + 1);
       });
   }, []);
-  const { user,dbUser } = useContext(contextProvider);
-  
 
+
+
+ 
   useEffect(() => {
     setLoaded(true);
   }, []); // run on mounting
@@ -142,124 +147,122 @@ function Editor() {
 
   if (loaded) {
     return (
-      <>
-        <Layout title={"Add New Post"}>
-          <form
-            onSubmit={handleSubmit(handlePostSubmit)}
-            className="lg:w-6/12 my-12 md:w-9/12 mx-3 md:mx-auto"
-          >
-            <div className="flex w-full flex-col">
-              {/* Title */}
-              <label>
-                <p>Title </p>
-                <input
-                  {...register("title", { required: true })}
-                  className="input w-full input-bordered"
-                  type="text"
-                />
-              </label>
-
-              {/* Category */}
-              <label>
-                <p>Category </p>
-                <Select
-                  className="py-3 bg-transparent"
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  isMulti
-                  onChange={(e) => setCategories(e)}
-                  options={options}
-                />
-              </label>
-              <div className="flex items-center my-2 justify-between gap-2">
-                <label className=" w-full">
-                  <p> Featured Image </p>
-                  <div className="flex justify-center">
-                  <label>
-                  <input
-                    accept="image/*"
-                    {...register("photo", { required: false })}
-                    className="file-input hidden file-input-bordered w-full"
-                    type="file"
-                    onChange={handleChange}
-                  />
-                  
-                  <div className="flex relative justify-center w-full">
-                   {
-                    file ?'':  <div className="border border-dashed p-12">
-                      <h3>Click and upload</h3>
-                    </div>
-                   } 
-                   </div>
-                   </label>
-               <div className="relative">
-               {
-                  file ? <>
-                   <img
-                  className="h-44 w-44 rounded-md object-cover"
-                  src={file}
-                  alt=""
-                />
-                
-                  </>:''
-                 } {
-                    file &&   <button className="absolute  bg-red-100 text-rose-500 px-2 top-0 right-0 rounded-full flex justify-self-center" onClick={()=>setFile('')}>Remove</button>
-                  }
-               </div>
-                  </div>
-               
-               
-                  
-                 
-                </label>
-                
-              </div>
-            </div>
-            <CKEditor
-              className="h-96 bg-transparent"
-              editor={ClassicEditor}
-              data=""
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log("Editor is ready to use!", editor);
-              }}
-              onChange={(event, editor) => {
-                // do something when editor's content changed
-                const data = editor.getData();
-                setpostBody({ data });
-              }}
-              onBlur={(event, editor) => {
-                console.log("Blur.", editor);
-              }}
-              onFocus={(event, editor) => {
-                console.log("Focus.", editor);
-              }}
-            />
-            <div className="my-2">
-              <p>Tags</p>
-              <CreatableSelect
-              className="bg-transparent"
-                components={animatedComponents}
-                isClearable
-                isMulti
-                options={options}
-                onChange={(e) => setTags(e)}
+      <Layout title={"Add New Post"}>
+     
+      <form
+          onSubmit={handleSubmit(handlePostSubmit)}
+          className="lg:w-6/12 my-12 md:w-9/12 mx-3 md:mx-auto"
+        >
+          <div className="flex w-full flex-col">
+            {/* Title */}
+            <label>
+              <p>Title </p>
+              <input
+                {...register("title", { required: true })}
+                className="input w-full input-bordered"
+                type="text"
               />
+            </label>
+
+            {/* Category */}
+            <label>
+              <p>Category </p>
+              <Select
+                className="py-3 bg-transparent"
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                onChange={(e) => setCategories(e)}
+                options={options}
+              />
+            </label>
+            <div className="flex items-center my-2 justify-between gap-2">
+              <label className=" w-full">
+                <p> Featured Image </p>
+                <div className="flex justify-center">
+                <label>
+                <input
+                  accept="image/*"
+                  {...register("photo", { required: false })}
+                  className="file-input hidden file-input-bordered w-full"
+                  type="file"
+                  onChange={handleChange}
+                />
+                
+                <div className="flex relative justify-center w-full">
+                 {
+                  file ?'':  <div className="border border-dashed p-12">
+                    <h3>Click and upload</h3>
+                  </div>
+                 } 
+                 </div>
+                 </label>
+             <div className="relative">
+             {
+                file ? <>
+                 <img
+                className="h-44 w-44 rounded-md object-cover"
+                src={file}
+                alt=""
+              />
+              
+                </>:''
+               } {
+                  file &&   <button className="absolute  bg-red-100 text-rose-500 px-2 top-0 right-0 rounded-full flex justify-self-center" onClick={()=>setFile('')}>Remove</button>
+                }
+             </div>
+                </div>
+             
+             
+                
+               
+              </label>
+              
             </div>
-            <div className="flex justify-center">
-              <button disabled={!file} className={`btn btn-success`} type="submit">
-                {posting && "Creating"}
-                { photUploading ? 'Photo Uploading' : 'Create Post'}
-              </button>
-            </div>
-          </form>
-        </Layout>
-        <div></div>
-      </>
+          </div>
+          <CKEditor
+            className="h-96 bg-transparent"
+            editor={ClassicEditor}
+            data=""
+            onReady={(editor) => {
+              // You can store the "editor" and use when it is needed.
+              console.log("Editor is ready to use!", editor);
+            }}
+            onChange={(event, editor) => {
+              // do something when editor's content changed
+              const data = editor.getData();
+              setpostBody({ data });
+            }}
+            onBlur={(event, editor) => {
+              console.log("Blur.", editor);
+            }}
+            onFocus={(event, editor) => {
+              console.log("Focus.", editor);
+            }}
+          />
+          <div className="my-2">
+            <p>Tags</p>
+            <CreatableSelect
+            className="bg-transparent"
+              components={animatedComponents}
+              isClearable
+              isMulti
+              options={options}
+              onChange={(e) => setTags(e)}
+            />
+          </div>
+          <div className="flex justify-center">
+            <button disabled={!file} className={`btn btn-success`} type="submit">
+              {posting && "Creating"}
+              { photUploading ? 'Photo Uploading' : 'Create Post'}
+            </button>
+          </div>
+        </form>
+       </Layout>
     );
   } else {
     return <h2>  <Lottie animationData={loading} loop={true} /> </h2>;
   }
 }
 
-export default Private(Editor);
+export default Editor;
