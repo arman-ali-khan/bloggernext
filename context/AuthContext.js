@@ -27,9 +27,8 @@ const AuthContext = ({ children }) => {
   // bottombar category show and hide
   const [category,setCategory]=useState(false)
 
-    // DB USer
 
-     
+    // DB User
     useEffect(() => {
       axios.get(`http://localhost:5000/dbUser?email=${user?.email}`)
       .then((response) => {

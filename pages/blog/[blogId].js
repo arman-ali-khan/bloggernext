@@ -19,6 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { FiEye } from 'react-icons/fi';
 import Lottie from "lottie-react";
 import gettingLike from '../../assest/lottie/love.json'
+import ButtonLoader from '../../components/Loader/ButtonLoader';
 
 
 
@@ -188,7 +189,7 @@ setLikeUpdate(!likeUpdate)
       <Link href={`/category/${data.categories[0].value}`} className='flex items-center gap-2 ml-3 bg-base-100 px-2 py-1 rounded-full'><BiFolder />{data.categories[0].label}</Link>
       <div className='flex items-center mr-3 gap-2 bg-base-100 px-2 py-1 rounded-full'><FiEye />
       {
-        viewLoading ? <div className='border-2 animate-spin border-dashed rounded-full h-4 w-4'></div>
+        viewLoading ? <ButtonLoader w={4} h={4} />
         :
         <div>{postView?.view}</div>
       }

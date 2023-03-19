@@ -3,6 +3,7 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MdOutlineModeComment } from "react-icons/md";
+import ButtonLoader from "../../Loader/ButtonLoader";
 
 const Single = ({ post }) => {
   // post view load
@@ -75,7 +76,7 @@ const Single = ({ post }) => {
                   ></path>
                 </svg>
                 {
-                  viewLoad ? <div className="h-4 w-4 rounded-full border-2 border-dashed animate-spin"></div>
+                  viewLoad ? <ButtonLoader w={4} h={4} />
                   :
                   <>
                   {postView?.view}

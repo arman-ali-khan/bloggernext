@@ -6,11 +6,12 @@ import { contextProvider } from "../../context/AuthContext";
 import Layout from "../../Layout/Layout";
 import Lottie from "lottie-react";
 import registerLottie from '../../assest/lottie/login.json'
+import ButtonLoader from "../../components/Loader/ButtonLoader";
 
 const Register = () => {
   const { createUser, handleUserUpdate, title } = useContext(contextProvider);
   const [value, setValue] = useState("");
-
+  const [loading,setLoading] = useState(false)
   const router = useRouter();
 
   const {
@@ -37,6 +38,7 @@ const Register = () => {
   }, [userCheck]);
 
   const onSubmit = (data) => {
+    setLoading(true)
     const photo = data.photo[0];
 
     const name = data.name;
@@ -79,7 +81,7 @@ const Register = () => {
                   },
                   body: JSON.stringify(userData),
                 });
-
+                setLoading(false)
                 router.push("/");
               });
             })
@@ -205,8 +207,8 @@ const Register = () => {
                   <button
                     disabled={userName.length > 0}
                     className="btn btn-primary"
-                  >
-                    Create Account
+                  >{loading ? <ButtonLoader w={6} h={6} />:'Create Account'}
+                    
                   </button>
                 </div>
               </div>

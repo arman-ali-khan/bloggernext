@@ -12,6 +12,7 @@ import makeAnimated from "react-select/animated";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import loading from '../../assest/loading.json'
+import Private from "../Private/Private";
 
 
 function Editor() {
@@ -261,4 +262,4 @@ function Editor() {
   }
 }
 
-export default Editor;
+export default Private(Editor);

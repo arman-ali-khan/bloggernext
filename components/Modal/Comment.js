@@ -6,10 +6,11 @@ import { toast } from 'react-hot-toast';
 import { AiOutlineDelete } from 'react-icons/ai';
 import {ImCancelCircle} from 'react-icons/im'
 import { contextProvider } from '../../context/AuthContext';
+import ButtonLoader from '../Loader/ButtonLoader';
 
 
 const Comment = ({post}) => {
-
+const [loading,setLoading] = useState(false)
 
     const {user,dbUser,commented,setCommented} = useContext(contextProvider)
     //  get comment
@@ -26,7 +27,7 @@ const { register,reset, handleSubmit, formState: { errors } } = useForm();
 // post comment
 
 const handlePostComment = data =>{
-
+    setLoading(true)
     const commentBody = {
         comment: data.comment,
         name: dbUser.name,
@@ -44,7 +45,7 @@ const handlePostComment = data =>{
     })
     .then(res=>res.json())
     .then(data=>{
-       
+        setLoading(false)
         reset()
         toast.success('Comment Added!')
         setCommented(!commented)
@@ -84,7 +85,7 @@ const handleDeleteComment = id =>{
                 dbUser.email ? <form onSubmit={handleSubmit(handlePostComment)} className='my-4 flex-col flex border-b py-2  md:flex-row gap-2 items-center'>
           
     <textarea {...register("comment", { required: true })}  type="text" className='textarea textarea-bordered w-full h-20' ></textarea>
-<button className=' md:w-40 btn'>Add Comment</button>
+<button className=' md:w-40 btn'>{loading?<ButtonLoader w={6} h={6} />:'Add Comment'}</button>
         </form>
         :
         <Link className='my-3 text-blue-400 hover:underline' href={'/login'} >Login to add comment</Link>

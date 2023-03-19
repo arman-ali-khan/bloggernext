@@ -6,6 +6,7 @@ import { contextProvider } from '../../context/AuthContext';
 import Layout from '../../Layout/Layout';
 import Lottie from "lottie-react";
 import registerLottie from '../../assest/lottie/login.json'
+import ButtonLoader from '../../components/Loader/ButtonLoader';
 
 const index = () => {
     const router = useRouter()
@@ -13,11 +14,15 @@ const index = () => {
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const [loading,setLoading] = useState(false)
+
     const handleLoginUser = (data)=>{
+      setLoading(true)
         const email = data?.email;
         const password = data.password;
         userLogin(email,password).then(result=>{
             router.push('/')
+            setLoading(false)
         })
     }
     return (
@@ -59,7 +64,7 @@ const index = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary">{loading ? <ButtonLoader w={6} h={6} />:'Login'}</button>
         </div>
       </div>
     </div>
