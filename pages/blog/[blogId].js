@@ -190,7 +190,7 @@ setLikeUpdate(!likeUpdate)
       {
         viewLoading ? <div className='border-2 animate-spin border-dashed rounded-full h-4 w-4'></div>
         :
-        <div>{postView.view}</div>
+        <div>{postView?.view}</div>
       }
       </div>
     </div>
@@ -229,7 +229,7 @@ setLikeUpdate(!likeUpdate)
     user?.email ? <div className="flex flex-col items-center gap-2">
   {/* onClick={()=>handleUnLike(data._id)}  */}
     {
-      userLike.email ? 
+      userLike?.email ? 
      <>
       {
         likeLoading ? 
@@ -259,7 +259,7 @@ setLikeUpdate(!likeUpdate)
     
     }
    
-    <p >{likes.length}</p>
+    <p >{likes?.length}</p>
   </div>
     :
     <div className="flex flex-col items-center gap-2">
@@ -269,7 +269,7 @@ setLikeUpdate(!likeUpdate)
            <RiHeart3Fill  className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
         </div>
      
-      <p >{likes.length}</p>
+      <p >{likes?.length}</p>
     </div>
   }
   
@@ -304,7 +304,7 @@ setLikeUpdate(!likeUpdate)
     user?.email ? <div className="flex flex-col items-center gap-2">
   {/* onClick={()=>handleUnLike(data._id)}  */}
     {
-      userLike.email ? 
+      userLike?.email ? 
       <>
       {
         likeLoading ? 
@@ -331,7 +331,7 @@ setLikeUpdate(!likeUpdate)
       </>
     }
    
-    <p >{likes.length}</p>
+    <p >{likes?.length}</p>
   </div>
     :
     <div className="flex flex-col items-center gap-2">
@@ -341,7 +341,7 @@ setLikeUpdate(!likeUpdate)
            <RiHeart3Fill  className="text-rose-200 hover:text-red-300 hover:bg-rose-600 text-4xl bg-rose-600 transition-all duration-200 hover:transition-all hover:duration-200 rounded-full p-1  " />
         </div>
      
-      <p >{likes.length}</p>
+      <p >{likes?.length}</p>
     </div>
   }
   <label htmlFor="postComment" onClick={()=>setDeleteId(data)} className="flex flex-col items-center hover:bg-base-100 rounded-lg  gap-2 hover:tooltip hover:flex hover:tooltip-open hover:tooltip-right" data-tip="Comments">
