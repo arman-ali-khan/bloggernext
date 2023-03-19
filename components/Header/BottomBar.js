@@ -4,13 +4,14 @@ import {GrHomeOption} from 'react-icons/gr'
 import {FiUser} from 'react-icons/fi'
 import {RxDashboard} from 'react-icons/rx'
 import {RiNotification2Line} from 'react-icons/ri'
-import {BiMessageSquareMinus} from 'react-icons/bi'
+import {BiMessageSquareMinus, BiSearchAlt} from 'react-icons/bi'
 import Sidebar from "../Modal/Sidebar";
 import { contextProvider } from "../../context/AuthContext";
 import Logout from "../Modal/Logout";
 import axios from "axios";
 import Notify from "../Modal/Notify";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import Search from "../Modal/Search";
 
 const BottomBar = () => {
   const {googleLogin,user,logOut,dbUser,category,setCategory} = useContext(contextProvider)
@@ -91,16 +92,13 @@ React.useEffect(() => {
           </li>
           <li className="list-none">
           
-            <div className="dropdown text- w-full dropdown-top sm:dropdown-end">
-  <label tabIndex={1} className="px-6 sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:flex tooltip-open tooltip-top"  data-tip="Message" href={'/'}><BiMessageSquareMinus /></label>
-  <ul tabIndex={1} className="dropdown-content border menu p-2 shadow bg-base-100 rounded-box w-64 overflow-hidden ">
-    <li className="flex items-center"><a> <img className="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/ogw/AAEL6siJ_YKAS_JAeA2_o9euKZRitBtuZj2B8_0LMtG1Hg=s32-c-mo" alt="" /> Arman Ali Khan</a></li>
-    <li className="flex items-center"> <a> <img className="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/ogw/AAEL6siJ_YKAS_JAeA2_o9euKZRitBtuZj2B8_0LMtG1Hg=s32-c-mo" alt="" /> Arman Ali Khan</a></li>
-    <li className="flex items-center"> <a> <img className="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/ogw/AAEL6siJ_YKAS_JAeA2_o9euKZRitBtuZj2B8_0LMtG1Hg=s32-c-mo" alt="" /> Arman Ali Khan</a></li>
-    <li className="flex items-center"> <a> <img className="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/ogw/AAEL6siJ_YKAS_JAeA2_o9euKZRitBtuZj2B8_0LMtG1Hg=s32-c-mo" alt="" /> Arman Ali Khan</a></li>
-    <li className="flex items-center"> <a> <img className="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/ogw/AAEL6siJ_YKAS_JAeA2_o9euKZRitBtuZj2B8_0LMtG1Hg=s32-c-mo" alt="" /> Arman Ali Khan</a></li>
-    <li className="flex items-center"> <a> <img className="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/ogw/AAEL6siJ_YKAS_JAeA2_o9euKZRitBtuZj2B8_0LMtG1Hg=s32-c-mo" alt="" /> Arman Ali Khan</a></li>
-  </ul>
+            <div className=" text- w-full ">
+  <label htmlFor="search" className="px-6 sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:flex tooltip-open tooltip-top"  data-tip="Search" href={'/'}><BiSearchAlt /></label>
+
+  {/* Search Input modal */}
+  {/* The button to open modal */}
+
+
 </div>
           </li>
           {/* HOme  */}
@@ -162,6 +160,9 @@ React.useEffect(() => {
       <Notify />
       {/* Back to top */}
       <a href="#top" className={` ${topvisible ? '   -translate-y-10':'-translate-y-14'} fixed -translate-y-14 right-6 bg-base-100 rounded-full px-2`}>Top</a>
+      {/* Put this part before </body> tag */}
+<Search />
+ 
     </div>
   );
 };

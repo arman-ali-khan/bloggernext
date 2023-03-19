@@ -11,7 +11,6 @@ const Categories = () => {
       axios.get(`http://localhost:5000/category`)
       .then(res=>setCategories(res.data))
     },[])
-    console.log(categories);
     return (
        <div className={`${category ?"flex ":''}`}>
          <div  className={`fixed ${category ? 'transition-all duration-300 left-0 ':'transition-all duration-300 -left-96 '}  items- top-0 h-full z-[99999999]`}>
