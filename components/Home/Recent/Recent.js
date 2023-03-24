@@ -1,7 +1,10 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { GiChart } from "react-icons/gi";
 import Single from "./Single";
+import useSWR from 'swr'
+
+
 
 const Recent = ({data:posts}) => {
 
@@ -14,9 +17,18 @@ const Recent = ({data:posts}) => {
       {
         posts.map(post=> <Single post={post} key={post._id} />)
       }
-    
      
     </div>
+    {/* Pagination */}
+  
+    {/* <div className="flex justify-center my-9">
+    <div className="btn-group flex flex-wrap">
+    {
+     [...Array(pages).keys()].map((item,i)=>  <button onClick={()=>setPage(item)} key={i} className={`btn btn-sm ${page===item ? 'btn-active':''}`}>{item+1}</button>)
+    }
+
+</div> */}
+    {/* </div> */}
    </div>
   );
 };

@@ -18,7 +18,7 @@ const Categories = () => {
 <ul className=' bg-base-200 py-7 rounded-r-xl h-full overflow-y-auto '>
  
  {
-  categories.map(cat=> <Link key={cat._id} href={`/category/${cat.value}`} ><li className="py-2 px-4 w-64 hover:bg-base-300 list-none flex items-center gap-2 text-sm"><HiOutlineFolder className='text-xl' /> {cat.label}</li></Link>)
+  categories.map(cat=> <Link key={cat._id} href={`/category/${cat.value}`} ><li className="py-2 px-4 w-64 hover:bg-base-300 list-none flex items-center gap-2 text-sm"><img src={cat.image} className='w-6 h-6 rounded-full object-cover overflow-hidden' alt="" /> {cat.label}</li></Link>)
  }
   
   </ul>

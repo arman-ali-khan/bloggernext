@@ -29,13 +29,13 @@ const Single = ({ post }) => {
 
   return (
     <>
-      {post.publish && (
+      {post.publish ? (
         <div className="w-full gap-2 items-center   md:px-2 shadow-lg border border-base-300 rounded-xl flex sm:block  ">
           <div>
             <div className=" w-24 h-24 sm:w-full sm:h-36  overflow-hidden rounded-xl">
               <img
                 className="rounded-xl  w-24 sm:w-full h-24 sm:h-36  hover:scale-105 duration-300   hover:duration-300 object-cover"
-                src={post.thumb}
+                src={post?.thumb}
                 alt=""
               />
             </div>
@@ -43,7 +43,7 @@ const Single = ({ post }) => {
           <div className="w-full">
             <div className="text-xs flex justify-between mr-2">
               <p>
-                <span>in</span> {post.categories[0]?.label}
+                <span>in</span> {post?.categories[0]?.label}
               </p>
 
               <p className="flex items-center gap-1 font-semibold">
@@ -51,7 +51,7 @@ const Single = ({ post }) => {
               </p>
             </div>
             <Link
-              href={`/blog/${post.id}`}
+              href={`/blog/${post?.id}`}
               className={` leading-3 text-base break-words  font-bold`}
             >
               {post.title.split(" ").slice(0, 13).join(" ")}
@@ -87,7 +87,8 @@ const Single = ({ post }) => {
             </div>
           </div>
         </div>
-      )}
+      ):''
+    }
     </>
   );
 };

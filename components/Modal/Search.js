@@ -8,14 +8,12 @@ import { MdOutlineModeComment } from 'react-icons/md';
 const Search = () => {
 
     const [searchData,setSearchData] = useState('')
-console.log(searchData);
     const [search,setSearch] = useState([])
 
     useEffect(()=>{
         axios.get(`https://blog-server-sparmankhan.vercel.app/search?q=${searchData}`)
         .then(res=>setSearch(res.data))
     },[searchData])
-    console.log(search);
     return (
         <>
          {/* Put this part before </body> tag */}
