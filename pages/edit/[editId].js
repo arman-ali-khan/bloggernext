@@ -12,6 +12,8 @@ import makeAnimated from "react-select/animated";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { FiUpload } from "react-icons/fi";
+import ButtonLoader from "../../components/Loader/ButtonLoader";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -64,13 +66,45 @@ export default function Home() {
   // Get post
   const [editPost, setEditPost] = useState({});
 
+  // Uploading...
+  const [uploadLoad, setUploadPhoto] = useState(false);
+  // Photo upload
+ 
+  const [uploadedPhoto, setUploadedPhoto] = useState(editPost.thumb ? editPost.thumb : 'https://media.istockphoto.com/id/1248723171/vector/camera-photo-upload-icon-on-isolated-white-background-eps-10-vector.jpg?s=612x612&w=0&k=20&c=e-OBJ2jbB-W_vfEwNCip4PW4DqhHGXYMtC3K_mzOac0=');
+  console.log(uploadedPhoto);
+
+  // Photo upload handle
+  const handlePhotoUpload = (data) => {
+    setUploadPhoto(true);
+    const photo = data;
+    console.log(photo);
+    const photoData = new FormData();
+    photoData.append("file", photo);
+    photoData.append("upload_preset", "nextblog");
+    photoData.append("cloud_name", "dcckbmhft");
+    fetch("https://api.cloudinary.com/v1_1/dcckbmhft/image/upload", {
+      method: "POST",
+      body: photoData,
+    })
+      .then((resp) => resp.json())
+      .then((photoData) => {
+        const photoUrl = photoData.url;
+        setUploadedPhoto(photoUrl);
+        setUploadPhoto(false);
+        console.log(photoUrl);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
+
   useEffect(() => {
     axios
       .get(`https://blog-server-sparmankhan.vercel.app/post/${id}`)
       .then((res) => {
         setEditPost(res.data);
       });
-  }, [id]);
+  }, [id,uploadedPhoto]);
 
   console.log(editPost);
   const {
@@ -137,53 +171,33 @@ export default function Home() {
   const [postBody, setpostBody] = useState("");
 
   const handlePostSubmit = (data) => {
-    setphotUploading(true);
-    const photo = data.photo[0];
-
-    const photoData = new FormData();
-    photoData.append("file", photo);
-    photoData.append("upload_preset", "nextblog");
-    photoData.append("cloud_name", "dcckbmhft");
-    fetch("  https://api.cloudinary.com/v1_1/dcckbmhft/image/upload", {
-      method: "POST",
-      body: photoData,
-    })
-      .then((resp) => resp.json())
-      .then((photoData) => {
-        setphotUploading(false);
-        setPosting(true);
-        const photoUrl = photoData.url;
-        if (photoUrl) {
-          const postData = {
-            title: title,
-            thumb: photoUrl,
-            categories: categories,
-            tags: tags,
-            body: postBody.data,
-          };
-          fetch(
-            `https://blog-server-sparmankhan.vercel.app/post/${editPost.id}`,
-            {
-              method: "PATCH",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(postData),
-            }
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              setPosting(false);
-              toast.success("Post Update");
-            });
-        } else {
-          toast.error("Photo Upload Faild!");
-        }
-      });
+    setPosting(true);
+    const postData = {
+      title: title,
+      thumb: uploadedPhoto,
+      categories: categories,
+      tags: tags,
+      body: postBody.data,
+    };
+    fetch(
+      `https://blog-server-sparmankhan.vercel.app/post/${editPost.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setPosting(false);
+        toast.success("Post Update");
+      });   
+    
   };
 
   // ================================
-
 
   if (user === null) {
     router.push("/login");
@@ -193,31 +207,29 @@ export default function Home() {
 
   return (
     <div>
-     <Layout title={`Update - ${editPost.title}`}>
-     {user?.email === editPost.email ? (
-        <form
-          onSubmit={handleSubmit(handlePostSubmit)}
-          className="lg:w-6/12 my-12 md:w-9/12 mx-3 md:mx-auto"
-        >
-          <div className="flex w-full flex-col">
-            {/* Title */}
-            <label>
+      <Layout title={`Update - ${editPost.title}`}>
+        {user?.email === editPost.email ? (
+          <form
+            onSubmit={handleSubmit(handlePostSubmit)}
+            className="lg:w-6/12 my-12 md:w-9/12 mx-3 md:mx-auto"
+          >
+            <div className="flex w-full flex-col">
+              {/* Title */}
+
               <p>Title </p>
+
               <input
-                {...register("title", { required: true })}
+                type="text"
                 className="input w-full input-bordered"
                 onChange={(e) => setTitle(e.target.value)}
-                type="text"
                 defaultValue={editPost.title}
               />
-            </label>
 
-            {/* Category */}
-            <label>
+              {/* Category */}
               <p>Category </p>
               {editPost.categories && (
                 <Select
-                  className="py-3"
+                  className="py-3 bg-base-200 text-black"
                   closeMenuOnSelect={false}
                   components={animatedComponents}
                   isMulti
@@ -226,104 +238,100 @@ export default function Home() {
                   options={options}
                 />
               )}
-            </label>
-            <div className="flex items-center my-2 justify-between gap-2">
-              <label className=" w-full">
-                <p> Featured Image </p>
-                <div className="flex items-center justify-center">
-                  <label>
-                    <input
+              <div className="flex items-center my-2 justify-between gap-2">
+                <label className=" w-full relative">
+                  <p> Featured Image </p>
+                  <div className="flex justify-center ">
+                    <label>
+                      <input
                       accept="image/*"
-                      {...register("photo", { required: true })}
-                      className="file-input  file-input-bordered w-full"
+                      className="file-input hidden file-input-bordered w-full"
                       type="file"
-                      onChange={handleChange}
-                    />
-
-                    <div className="flex relative justify-center w-full">
-                      {file ? (
-                        ""
+                      onChange={(e) => handlePhotoUpload(e.target.files[0])}
+                    /> 
+                 
+                 
+                    <div className="relative">
+                      {uploadedPhoto ? (
+                        <>
+                          <img
+                            className="h-44 w-44 rounded-md object-cover"
+                            src={uploadedPhoto}
+                            alt=""
+                          />
+                        </>
                       ) : (
-                        <div className="border border-dashed p-12">
-                          <h3>
-                            <img className="w-24" src={editPost.thumb} alt="" />
-                          </h3>
-                        </div>
-                      )}
-                    </div>
-                  </label>
-                  <div className="relative">
-                    {file && file ? (
-                      <>
+                        
                         <img
-                          defaultValue={editPost.thumb}
                           className="h-44 w-44 rounded-md object-cover"
-                          src={file}
+                          src='https://media.istockphoto.com/id/1248723171/vector/camera-photo-upload-icon-on-isolated-white-background-eps-10-vector.jpg?s=612x612&w=0&k=20&c=e-OBJ2jbB-W_vfEwNCip4PW4DqhHGXYMtC3K_mzOac0='
                           alt=""
                         />
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    {file !==
-                    "https://as2.ftcdn.net/v2/jpg/01/64/16/59/1000_F_164165971_ELxPPwdwHYEhg4vZ3F4Ej7OmZVzqq4Ov.jpg" ? (
-                      editPost.thumb ? (
+                      )}
+                      {uploadedPhoto && (
                         <button
                           className="absolute  bg-red-100 text-rose-500 px-2 top-0 right-0 rounded-full flex justify-self-center"
-                          onClick={() =>
-                            setFile(
-                              "https://as2.ftcdn.net/v2/jpg/01/64/16/59/1000_F_164165971_ELxPPwdwHYEhg4vZ3F4Ej7OmZVzqq4Ov.jpg"
-                            )
-                          }
+                          onClick={() => setUploadedPhoto("")}
                         >
                           Remove
                         </button>
+                      )}
+                       <div className="flex relative justify-center w-full">
+                      {uploadedPhoto || uploadLoad ? (
+                        ""
+                      ) : (
+                      ''
+                      )}
+                      {uploadLoad ? (
+                       <div className=" flex justify-center items-center">
+                        <ButtonLoader w={12} h={12} />
+                       </div>
                       ) : (
                         ""
-                      )
-                    ) : (
-                      ""
-                    )}
+                      )}
+                    </div>
+                    </div>
+                    </label>
                   </div>
-                </div>
-              </label>
+                </label>
+              </div>
             </div>
-          </div>
-          <QuillNoSSRWrapper
-            defaultValue={editPost.body}
-            modules={modules}
-            className="h-96 my-32"
-            formats={formats}
-            theme="snow"
-            onChange={(content) => {
-              // var htmlToRtf = require('html-to-rtf');
-              setpostBody(content);
-            }}
-          />
-          <div className="my-12">
-            <p>Tags</p>
-            {editPost?.tags && (
-              <CreatableSelect
-                components={animatedComponents}
-                isClearable
-                isMulti
-                defaultValue={editPost?.tags}
-                options={options}
-                onChange={(e) => setTags(e)}
-              />
-            )}
-          </div>
-          <div className="flex justify-center">
-            <button className="btn " type="submit">
-              {posting && "Updating..."}
-              {photUploading ? "Photo Uploading..." : "Update Post"}
-            </button>
-          </div>
-        </form>
-      ) : (
-        <p className="text-center py-12 "> You can't edit this post</p>
-      )}
-     </Layout>
+            <QuillNoSSRWrapper
+              defaultValue={editPost.body}
+              modules={modules}
+              className="h-96 mb-32"
+              formats={formats}
+              theme="snow"
+              onChange={(content) => {
+                // var htmlToRtf = require('html-to-rtf');
+                setpostBody(content);
+              }}
+            />
+            <div className="my-12">
+              <p>Tags</p>
+              {editPost?.tags && (
+                <CreatableSelect
+                  className="text-black"
+                  components={animatedComponents}
+                  isClearable
+                  isMulti
+                  defaultValue={editPost?.tags}
+                  options={options}
+                  onChange={(e) => setTags(e)}
+                />
+              )}
+            </div>
+            <div className="flex justify-center">
+              <button className="btn " type="submit">
+                {posting && "Updating..."}
+                {photUploading ? "Photo Uploading..." : "Update Post"}
+              </button>
+            </div>
+          </form>
+        ) : (
+          <p className="text-center py-12 "> You can't edit this post</p>
+        )}
+      </Layout>
     </div>
   );
 }

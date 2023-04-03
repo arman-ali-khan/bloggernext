@@ -6,6 +6,8 @@ import { Toaster } from "react-hot-toast";
 import 'react-quill/dist/quill.snow.css'  
 
 
+
+
 export default function App({ Component, pageProps }) {
   return (
     <AuthContext>
@@ -15,6 +17,8 @@ export default function App({ Component, pageProps }) {
   position="top-center"
   reverseOrder={false}
 />
+
+
     </AuthContext>
   );
 }

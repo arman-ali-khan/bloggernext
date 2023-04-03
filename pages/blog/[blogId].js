@@ -114,13 +114,13 @@ useEffect(()=>{
 },[data,user?.email,likeUpdate])
 
 
-
+// Handle like
 
 const handleLike = e =>{
   setLikeLoading(true)
   const likeData = {
     name: dbUser.name,
-    email: dbUser.email,
+    email: user.email,
     postEmail: data.email,
     postId: data.id,
     id: e,
@@ -142,6 +142,8 @@ const handleLike = e =>{
     setLikeLoading(false)
   })
 }
+
+
 
 
 // unlike

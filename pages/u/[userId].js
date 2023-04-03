@@ -2,8 +2,8 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { contextProvider } from "../context/AuthContext";
-import Layout from "../Layout/Layout";
+import { contextProvider } from "../../context/AuthContext";
+import Layout from "../../Layout/Layout";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { toast } from "react-hot-toast";
 

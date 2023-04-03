@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineModeComment } from "react-icons/md";
 import ButtonLoader from "../../Loader/ButtonLoader";
 
+
+
 const Single = ({ post }) => {
   // post view load
  const [viewLoad,setViewLoad] = useState(true)
@@ -30,7 +32,7 @@ const Single = ({ post }) => {
   return (
     <>
       {post.publish ? (
-        <div className="w-full gap-2 items-center   md:px-2 shadow-lg border border-base-300 rounded-xl flex sm:block  ">
+        <div className="w-full gap-2 items-center  post md:px-2 shadow-lg border border-base-300 rounded-xl flex sm:block  ">
           <div>
             <div className=" w-24 h-24 sm:w-full sm:h-36  overflow-hidden rounded-xl">
               <img

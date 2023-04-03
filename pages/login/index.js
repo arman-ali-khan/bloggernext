@@ -64,7 +64,7 @@ const index = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">{loading ? <ButtonLoader w={6} h={6} />:'Login'}</button>
+          <button disabled={loading} className="btn btn-primary">{loading ? <ButtonLoader w={6} h={6} />:'Login'}</button>
         </div>
       </div>
     </div>

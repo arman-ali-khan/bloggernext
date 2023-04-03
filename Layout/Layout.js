@@ -1,9 +1,13 @@
 import Footer from '../components/Footer/Footer';
 import Navbar from '../components/Header/Navbar';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import BackToUp from '@uiw/react-back-to-top';
+import { useMemo } from 'react';
+
+
 
 const Layout = ({children,title,description,body,thumb}) => {
+
     return (
         <div>
 
@@ -24,6 +28,9 @@ const Layout = ({children,title,description,body,thumb}) => {
       <main>
         {children}
       </main>
+      <div className="container">
+      <BackToUp >Top</BackToUp>
+    </div>
       <Footer />
         </div>
     );

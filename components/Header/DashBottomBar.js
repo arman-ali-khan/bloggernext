@@ -15,7 +15,7 @@ import Search from "../Modal/Search";
 
 
 
-const BottomBar = () => {
+const DashBottomBar = () => {
   const {googleLogin,user,logOut,dbUser,category,setCategory} = useContext(contextProvider)
 
   // Bottom bar
@@ -88,8 +88,8 @@ React.useEffect(() => {
           <li className="list-none">
          
     {/* <!-- Page content here --> */}
-   <label onClick={()=>setCategory(!category)} htmlFor="my-drawer" className="px-6  drawer-button sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Categories" href={'/'}><RxDashboard /></label>
-           
+   <label htmlFor="dashBottom" className="px-6  drawer-button sm:px-8 py-4 flex items-center text-xl text- hover:bg-gray-500 hover:bg-opacity-30 rounded-full hover:tooltip hover:block tooltip-open tooltip-top"  data-tip="Sidebar" href={'/'}><RxDashboard /></label>
+ 
             {/* < className="btn btn-primary drawer-button">Open drawer</> */}
           </li>
           <li className="list-none">
@@ -126,7 +126,7 @@ React.useEffect(() => {
    <div></div>
     <li className=""><a className="text-center flex justify-center">{dbUser.name}</a></li>
     <li className="list-none"><a>Settings</a></li>
-    <li className="list-none"><Link href={'/@dashboard'}>Dshboard</Link></li>
+    <li className="list-none"><a>Dashboard</a></li>
 {/* Day Night */}
 <label className="swap swap-rotate !place-content-start px-4 py-3">
       <input onClick={toggleTheme}  type="checkbox" />
@@ -168,4 +168,4 @@ React.useEffect(() => {
   );
 };
 
-export default BottomBar;
+export default DashBottomBar;

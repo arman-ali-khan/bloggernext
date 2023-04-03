@@ -12,10 +12,12 @@ export default function Document() {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 <link rel="shortcut icon" href="https://res.cloudinary.com/dcckbmhft/image/upload/v1677914511/fav_dtornq.svg" />
+
         </Head>
       <body>
         <Main />
         <NextScript />
+        
       </body>
     </Html>
   )

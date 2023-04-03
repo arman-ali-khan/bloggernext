@@ -265,6 +265,7 @@ const [uploadLoad, setUploadPhoto] = useState(false);
       modules={modules}
       formats={formats}
       theme="snow"
+      className="h-96 my-32"
       onChange={(content) => {
         // var htmlToRtf = require('html-to-rtf');
         setpostBody(content);
