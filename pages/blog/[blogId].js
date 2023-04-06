@@ -100,7 +100,24 @@ useEffect(()=>{
   axios.get(`https://blog-server-sparmankhan.vercel.app/likes/${data._id}`)
   .then(res=>{
     setLikes(res.data)
-  })
+  }) .catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
 },[likeUpdate])
 
 // Get like 
@@ -110,7 +127,24 @@ useEffect(()=>{
   axios.get(`https://blog-server-sparmankhan.vercel.app/like/${data._id}?email=${user?.email}`)
   .then(res=>{
     setUserLike(res.data)
-  })
+  }) .catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
 },[data,user?.email,likeUpdate])
 
 
@@ -176,7 +210,24 @@ setLikeUpdate(!likeUpdate)
    .then(res=>{
      setComments(res.data)
    })
-   
+   .catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
  },[data._id,commented])
 
     return (
@@ -197,7 +248,7 @@ setLikeUpdate(!likeUpdate)
       }
       </div>
     </div>
-		<div className="p-2 pb-12 mx-auto -mt-16 space-y-6 sm:px-3 sm:mx-3 lg:mx-12 rounded-xl border bg-base-100">
+		<div className="p-2 pb-12 mx-auto -mt-16 space-y-6 sm:px-3 sm:mx-3 lg:mx-12 rounded-xl border backdrop-blur-xl backdrop-hue-rotate-15 backdrop-brightness-90 ">
 			<div className="space-y-2 ">
 				<h4  className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</h4>
       {/* Post action */}

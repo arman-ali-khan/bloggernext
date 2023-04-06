@@ -82,7 +82,7 @@ React.useEffect(() => {
 
       
       
-      <div className=" fixed backdrop-blur-md	justify-center flex  mx-auto px-3 text-base md:bg-opacity-70 bg-base-300  opacity-90 md:bg-base-200  rounded-full">
+      <div className=" fixed  backdrop-blur-xl backdrop-hue-rotate-15 backdrop-brightness-90 	justify-center flex  mx-auto px-3 text-base md:bg-opacity-70 bg-base-300  opacity-90 md:bg-base-200  rounded-full">
     
         <ul className="flex relative justify-center ">
           <li className="list-none">
