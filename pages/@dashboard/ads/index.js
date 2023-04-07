@@ -4,7 +4,7 @@ import DashboardLayout from '../../../Layout/DashboardLayout';
 const index = () => {
     return (
         <DashboardLayout>
-            Ads
+           <p>Hello Ads</p>
         </DashboardLayout>
     );
 };

@@ -119,9 +119,9 @@ React.useEffect(() => {
   {/* USer Menu */}
 {
   dbUser  ? 
-  <ul tabIndex={0} className="dropdown-content border relative menu p-2 shadow bg-base-100 rounded-box w-52">
+  <ul tabIndex={0} className="dropdown-content border relative menu p-2 shadow !backdrop-blur-xl bg-base-200 backdrop-hue-rotate-15 backdrop-brightness-90  rounded-box w-52">
   <div>
-    <img className="w-16 h-16 rounded-full absolute -top-12 flex justify-center left-16" src={dbUser.photo} alt="" />
+    <img className="w-16 h-16 rounded-full p-2 absolute -top-12 flex justify-center left-16" src={dbUser.photo} alt="" />
   </div>
    <div></div>
     <li className=""><a className="text-center flex justify-center">{dbUser.name}</a></li>
@@ -140,7 +140,7 @@ React.useEffect(() => {
 <label className="bg-red-200 text-rose-600" htmlFor="logoutModal">Logout</label></li>
   </ul>
   :
-  <ul tabIndex={0} className="dropdown-content border relative menu p-2 shadow bg-base-100 rounded-box w-52">
+  <ul tabIndex={0} className="dropdown-content border !backdrop-blur-xl bg-base-200 backdrop-hue-rotate-15 backdrop-brightness-90 relative menu p-2 shadow rounded-box w-52">
    <div></div>
     <li className="list-none"><Link href={'/login'}>Login</Link></li>
     <li className="list-none"><Link href={'/register'}>Signup</Link></li>
